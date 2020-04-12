@@ -1,9 +1,6 @@
 #!/usr/bin/python3.7
 
-
-
 import requests
-
 from src.libs.send_req import SendRequest
 from src.user_inputs.address_list import Inputs
 from src.libs.setup_log import SetupLogging
@@ -39,15 +36,6 @@ class GetGasLimit(object):
     def get_gas_limit(self):   # returns the gas_limit  / "params":[{{chainIdk}},{{senderk}},{{hex2}},[]],
         st_obj = SetupTop()
 
-        # hex = '504b03041400080808005455924e00000000000000000000000025000400526576696577436f6e74726163742457726974655265766965774576656e742e636c617373feca00008d94df6fdb5414c7bf37b1e324f39234f4074b37da41a089932e63fcdeda020b1b04da6db463133ce12656eb2d758aed741230241e40e201241ee0618fa0f1432ab049b49340423cf1c0df8410e75c7beee266c083ef8f73cf3de773bfe75efff9f72fbf0138813732c8e3b92c8a38c9a353dccc7133af61218b144ea6f13cf72f70f3621aa7d368f2f025de7346c3cb59bc821637af6a784dc3a24066d3ed75fa6dbfd511282e5e31b7cc46d774d61a2bbe6b3b6ba70472aeb5655bd79abd8d0dcbf13d81d435d7f62d9706febaed958f0b141697431fc777cdb64fbb5273b663fb0b02ad4a7c717f92ff63a95e12509abd8e25905fb41deb5c7f63d5722f9aab5d8bc17b6db37bc9746d9e874685f108ee32e3060c67b6e808027acb712cb7d9353dcf228fa331c2727c079d475fb3fc0b7b4a8d56aac3b4d2bd01afb1caf0738c50b0e598aa23de7e5b86fc2e876267bcbd71daef05d14867eb9dbed9f562b9ceaf5eb148e9ea5b02a23758d77049ca63921607577cb37d75c9dc94aad115a1f0eba6b71e489dac545b94c4b5bc7e979c054db22bbdbedbb6cedaacf10383ca1de33c3a1ec4211d252ce918c5988e716e263026301197e374dfee76f84807a26b383fa3e31cce737381d0ebd383f76f7e8610ead3c11d64df1aca3a5ec7b2861581a9ffa8a4868b3aea98d5f1049ea4bb11d745a064f71a4ebfeb35da618c86d7b9da082f0ec941e54b999b9b9643f59d1d56df7da6f08c24f9e14af3df96d3546e792949d781fb258dfc14074f37c01f04c334fd0d8aa000509060f9e9c791e00ac87e82fb42810b44f32cf9953049ed619ab9b4ae525f326a3b10c61d248cfa0e92c6ec0e14e390b203f5b68c7184da71e9f92e32780f39bc4fd9ae53c40ff010590dca4c513085870139628a841c3147528e9844a1cc8fa01ce66f502fa8578d9f91bc15a54a49e38732b41e3884a1051ec563e1e605f2e61429864fee8166a5f523daf3b18c301e7845702909c7896786822871904f86825486832871904f69cf67f701190f41aa4341d438c8e743418ce1206a1ce40bdaf3e57d402642905a04b2413e9ca7f92b526fde81564cef22c365a2ae30b38b6cf140605022831e18d4bb86c2756a7671307e8c1bf71ca3191d835e6898fa07f2e61bd3326adf4055b66b7f2067ec2257a3ef26d4e476ed77e49798a52e790a37d8c828758913cdd5baa4296c53b0a404281102f015347c4d0fe226d9bea5b4df611edf4ba8e92071a44c0bc764498e10de71b225f0b84457b59cf80ba31a4ee46995fe2b217a27ac4039506a64ae3035b91e8834f2f6dd892a2793db912c45f97c7e441a3f511d6e519edbf7d4a91cd2a429c353789a3225f08cdcfb2c8e864f3a8fb3c49ef807504b07086c47f91fe203000036080000504b03041400080808005455924e0000000000000000000000001b000000526576696577436f6e7472616374245265766965772e636c6173738d955d73db541086df634b96ec288e713eda249416638a2d274df92e891ba0a60143927ea44da10c43155bc42a8e1c24b9bd60f805fc03eee12accd01992cec00cc3552ffa9b1886dd23c5b15575860bafceee39da7df4ee9ef1d37ffff80bc01bf83c0b0d2b394ca3ceabcb6c56d9bccfb10f345cc9a1818fd85cd5b096430e751d1ff3f3131d4d1d9feaf84cc7ba8e0d1d9b1cbea6e1ba4076dfebb5fbada0d91628aedfb71e584b5dcbdd5dda0a3cc7dd5d11d05bbdbd3ddb0d7c81cc43cf096c8f1641c7f1cb17050aeb37ed078efdb0d17303cf6a05743e53775c2758156856e29bcfa6ff3f91eab680d2e8b56d818975c7b537fb7b3bb677cbdae9da8cdc6b59dd6dcb73d88f820ae31149585ec068baaeed35ba96efdb143f15e32a872eb11bbb7670fd448fa94a354911c31f39355d49661ea3648d817663feb097a5bd3b919859ff649db1bfeb5b5d3f96f4dace7d9be4abde1510bdd136455bf4a6177decf85660b5beddb0f6a5183417d4c28ee5774205d3956a531ef6fbdd80d291a307bd905a20b7d5eb7b2d7bcd6115274755bac0450dcc61dec08bb8616006a70c9c6633cbe626b634dc22f2447135dc36b0880b06dec2dbd482b86257fa4eb7cd0ae4bf2f0d26b2b45c32b08d3bc459a2df0201968ea79103cb045f0a6792dd1f0c5cc2791acab83cf2b3a9233a7784a7803e6ea4b5324822e647d947521d6b94b1f6f76d97fabe98d4f76742d187ade01cddd569baca0a522c1dad52ac9e7ccef2b3506071c9cf4190c267c8be449e47fb2a3de7ccda2184f9182973e1106973f1108a39ab1c427d24739c253b234f2e238b15e451c7242e53ee55aa0d985499b2e0659401b9628a945c31475aae9844a1caafe27c547f899e829eaaf93bd2bf0d4a6564f04399da080f44a9055e43257a79954e73890cc3a74f4073327a95de59931966c25303b88c84e3c2d54410250ed24c043193419438c806bdb3f91c90d311482d11448d83dc480459480651e320b7e99dede780cc4620748ba25cbfd2196e5bd3acfd025539a83d41de3c42a646bf9fa1a60f6a7f43dbe0be2dd0ef08fa4f1c64f9c857867c957c95fc034a969638735410b84b33fb2529f0154de3d754f81ecd9325f1ce858507784d52e522619da14f7d9d6229facb6219542d2ffec1948637276897ee7e84de8e64289b922c5b2f9c9def98922a7befd851a5337f3010a92867f81be8d8a5bbd44109ce9058e58846a7dbf30ede95625d1a74ed473ac34db1fe44ee8bc7182b1a47180fab8f17f36c26d814d8bc701c0b8986f78bf17d75b03f49e60853f189708726c28a1053784fda65bc125d788dee5209a9ff00504b0708ace91217c3030000f0070000504b03041400080808005455924e00000000000000000000000014000000526576696577436f6e74726163742e636c6173739557f957135714fe5e162686513641a3288814c366ba58b5805644ac690111148aadd2814c61244ce2cc04a5b5b5b576b7fbaadd37edf24b7b4e8b52cef1f4e7fe49fd41fbbd49800442b527272f6feebbefbeeffbee7d37c9dfb7febc09e07efc12c4360c2b782a080f8657a10e5a1095180960348818f4009e0e620ce30a8c204e61228820e2859884a920a120194411860bb106a7a5d15260075186b8dceb049092c6a900ce14e22ca60bf10c9e95c33905cf29783e884d1896c3f9005e08e045399d90a75f90c34b015c54f0b2825714bc2a503c68198edea74f19fa99ce29dd7404d4a869ea56475cb36ddd1628482f0a28963ba1a9a8eb9436a545528e118f746bc9568155fdc698a939294b17e8ca5d6d4b3fc635732cd2ef588639d69ae5d065d84e5b57fa888e84e958daa8539b7e6cddcb17cf6f334cc3d92be00dd70f08f83a12315d42304cbd273539a25b47b591382da55d89512d3ea059867cce187dceb841c0c54b4e60d8c2338bc405f6845742996da95f0128f927ad442c35ea446312c8b28d026baccccec9498a4c488a168b59bacdd9e62e23113153713b329a891bb1631391f6f4ba54c0caa05cb7e2f9c1b48b5453b2cdd597eb15b9e24c27e705aabfeb5c08acee77b4d109a6d4ddabe035562fcb5520d497321d63521f306c832beda6997034c74898b63c202f3b6dc127d2ab4dcb783ca026374eaf666993baa35b39011bee18b04f3f9d322c3d267519d39dbef9b2adcd93e4a5fc5bf3d7c2ff91a9ee8e0007d2492b26b8f678bc77be7408716db83e5ff5780cd6553099e5987d05fb7509db6b48bbd79277766bee6a9e2b2881d62e2395c7cded15afbb9de50d62e84fa4ac51fda0216ba72c5783ed72b78a7b719f40c962e4439a3dce9a51d18466156fe212ab3143b93a7aa0dab0abad4cbe14bca5e26dbc2350998e5c3d7f5daa354bcf727b57c57b785fa03c6f1258982a3ec01109e543051fa9f8189ff006e69225fc4543bb6569d3d2aae2535c5671059f09542d89beb453aaf81c5f649121932c322abec45702e209aaa7e26b7c43fd547c8b4b2abec3f74cfe52ad79bd979af6a78c784cb754fc80ab0c55c377938a6bf851c54ff8994f27482b17654ee0c323a77469da94b72017b754fe5703e2bdcf292636b8c5e7286fa7e6242cf633c3ee9c4c3ad36e9f3e2eb0216fcc63dc64bb5f25ae4a542f7c3ccf6d639f5f9f777fb74d9d0a6cdda42c02d5e115bacb62ef0c38897979a3e1a5df0277d3f3f3a35b9df31547ce635298baecce9116bfb57eb989ee6cfe2cdf7cee94ce9b4c31d8ee3cab7719dea74f1a8c5015ceaf8e5bbd2e8d82097dda4d6949b87e594309180bc9adc8599e4f3a7d9471cdeed1cf3282cf743f721bd802a2022d9964d2049a576eaecb0b5f6e8cebe69833ee565594dfb3766ac4cee4b3221c8de6e996d8c25f5bdb2010e61bb2ebf0733b671e44e0e39c0d8ae3fdb4ec85d7f5296eb80ed13007cfd07578ff80ef37d7fb018ef2e79b1c7d50b1833335ed8f07b1939f02bbb09b31184b4450c01770be7106fe2b507cd7e0f39616dc80d2946d08d07003ab7ae6101c6a686c6a9e41e175a82dbe86dfe16b9cc56a0ffec29a16bf08f9af429d43111115b7f843fe906f16251e0cba7e21ff2c4abd189c43d96290b537501ef2fd4a083e17fa7614ba504bf8aa4129452923e87274a2028f611d8e228493d880096cc439fe30dce10ae252c8d093b387d0e2523e8f56ce3c8c328436ec21e99d88d2ff619ed6c9957d68871ffb3312a52d1db41ca0652dfc85fb44d13e710b3b15742a38a8e0111ce24a017da3fc7c946f5217048685b10bdd0c2ef334c283651eaa72b4ada09439b249eedeacb46d71994b5e15e9ed0bbcaa32bc243a3f3c4497a9909e05588733b014b100a81747e82293bd8bc0a45217e5f9b35847b0995c7597aeef21a090408b4fe66c83c065ec95b38d82182b5bfc4d327b329573d8c41d9b99bdaad26a0e21fffcac740b8719d4f45cbb7db3d94b87adbed80c6a7bb277dc9371695ecc78037983a51f64e997f2a91c8db437315fcd1826c1115e0093e57f811740aab283dce57a1fb5f04b36197d82fc2fd1cffa60a7878563ccac87b11218a09fd7cdb1d433ed35b8e0f5386d52cf8df0dce63f0ebf822105c7996905fc0e7c12f887cbd9ea7a70c21d4f122a18c4c302ad43bd1bba8ed03dff02504b0708d4b274262a0600004e0d0000504b010214001400080808005455924e6c47f91fe203000036080000250004000000000000000000000000000000526576696577436f6e74726163742457726974655265766965774576656e742e636c617373feca0000504b010214001400080808005455924eace91217c3030000f00700001b0000000000000000000000000039040000526576696577436f6e7472616374245265766965772e636c617373504b010214001400080808005455924ed4b274262a0600004e0d0000140000000000000000000000000045080000526576696577436f6e74726163742e636c617373504b05060000000003000300e2000000b10e00000000'
-        # methodk = "imputedContractCreateGas"
-        # request = st_obj.setup_top(method_nm, p_list)
-        # request = st_obj.setup_top(method_nm, p_list)
-        # resp1 = SendRequest.send_request(request)
-        # gasLimit = resp1["gasLimit"]  ## don't know why it says this-- ?
-        # print("gaslimit: ", gasLimit)
-        # gasLimit = gasLimit * 10**3  # gas must be less than 10000000","data":null
-        # # gasLimit = gasLimit
         g_limit = 9000000
         return g_limit
 
@@ -56,78 +44,5 @@ if __name__ == "__main__":
     c = GetGasLimit()
     g = c.get_gas_limit()
     print(g)
-
-
-
-  #
-  # Map<String, Object> parameters = new HashMap<>();
-  #       parameters.put("sender", sender);
-  #       parameters.put("gasLimit", form.getGasLimit());
-  #       parameters.put("price", form.getPrice());
-  #       parameters.put("password", password);
-  #       parameters.put("remark", form.getRemark());
-  #       parameters.put("contractAddress", form.getContractAddress());
-  #       parameters.put("value", form.getValue());
-  #       parameters.put("methodName", form.getMethodName());
-  #       parameters.put("methodDesc", form.getMethodDesc());
-  #       parameters.put("args", contractArgs);
-  #       RpcClientResult result = restFul.post("/contract/call", parameters);
-  #       if (result.isFailed()) {
-  #           return CommandResult.getFailed(result);
-  #
-
-
-#
-'''
-{
-  "contractAddress": "TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM",
-  "createTxHash": "7a2aa78e85cdf37a72e88da25c82acfdff57a5a786718909e2c4d50cc3c45cf5",
-  "creater": "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7",
-  "gasLimit": 11725,
-  "price": 25,
-  "methodName": "writeReview",
-  "methodDesc": "(String productId, String reviewComments) return LReviewContract$Review;",
-  "args": "[[\"baseballOutfit\"],[\"fit a little large\"]]",
-  "value": 0,
-  "resultInfo": {
-    "txHash": "7a2aa78e85cdf37a72e88da25c82acfdff57a5a786718909e2c4d50cc3c45cf5",
-    "contractAddress": "TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM",
-    "success": true,
-    "errorMessage": null,
-    "result": "{\"productId\":\"baseballOutfit\",\"comments\":\"fit a little large\",\"writer\":\"TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7\"}",
-    "gasLimit": 11725,
-    "gasUsed": 7817,
-    "price": 25,
-    "totalFee": "0.00393125",
-    "txSizeFee": "0.001",
-    "actualContractFee": "0.00195425",
-    "refundFee": "0.000977",
-    "value": "0",
-    "nulsTransfers": [],
-    "tokenTransfers": [],
-    "remark": "call",
-    "contractTxList": [],
-    "events": [
-      "{\"contractAddress\":\"TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM\",\"blockNumber\":390697,\"event\":\"WriteReviewEvent\",\"payload\":{\"productId\":\"baseballOutfit\",\"reviewComments\":\"fit a little large\",\"writer\":\"TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7\"}}"
-    ]
-  }
-}
-'''
-
-'''
-@Parameters(value = {
-        @Parameter(parameterName = "chain", requestType = @TypeDescriptor(value = int.class), parameterDes = "链id"),
-        @Parameter(parameterName = "sender",  parameterDes = "交易创建者账户地址"),
-        @Parameter(parameterName = "password",  parameterDes = "调用者账户密码"),
-        @Parameter(parameterName = "value", requestType = @TypeDescriptor(value = BigInteger.class), parameterDes = "调用者向合约地址转入的主网资产金额，没有此业务时填BigInteger.ZERO"),
-        @Parameter(parameterName = "gasLimit", requestType = @TypeDescriptor(value = long.class), parameterDes = "GAS限制"),
-        @Parameter(parameterName = "price", requestType = @TypeDescriptor(value = long.class), parameterDes = "GAS单价"),
-        @Parameter(parameterName = "contractAddress",  parameterDes = "合约地址"),
-        @Parameter(parameterName = "methodName",  parameterDes = "合约方法"),
-        @Parameter(parameterName = "methodDesc",  parameterDes = "合约方法描述，若合约内方法没有重载，则此参数可以为空", canNull = true),
-        @Parameter(parameterName = "args", requestType = @TypeDescriptor(value = Object[].class), parameterDes = "参数列表", canNull = true),
-        @Parameter(parameterName = "remark",  parameterDes = "交易备注", canNull = true)
-
-'''
 
 
