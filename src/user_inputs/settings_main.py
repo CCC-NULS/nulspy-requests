@@ -24,3 +24,14 @@ def get_settings(machine):
         url42 = "http://127.0.0.1:18004/jsonrpc"
         settings_d = {"chain": chain2, "url3": url32, "url4": url42}
         return settings_d
+
+    elif machine == 3:
+        chain2 = 2
+        url32 = "http://beta.wallet.nuls.io:18003"
+        url42 = "http://beta.wallet.nuls.io:18004/jsonrpc"
+        settings_d = {"chain": chain2, "url3": url32, "url4": url42}
+        return settings_d
+
+        # beta.wallet.nuls.io: 47.244.186.65
+    # http://apitn2.nulscan.io
+    # https: // beta.wallet.nuls.io / api
