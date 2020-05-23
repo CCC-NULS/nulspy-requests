@@ -9,9 +9,9 @@ def get_settings(machine):
         return settings_d
 
     elif machine == 1:
-        chain1 = 4810
-        url31 = "http://westteam.nulstar.co:18003"
-        url41 = "http://westteam.nulstar.co:18004/jsonrpc"
+        chain1 = 3
+        url31 = "http://westteam.nulstar.com:18003"
+        url41 = "http://westteam.nulstar.com:18004/jsonrpc"
         settings_d = {"chain": chain1, "url3": url31, "url4": url41}
         return settings_d
 

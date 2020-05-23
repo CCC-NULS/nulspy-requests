@@ -9,7 +9,7 @@ from src.libs.send_req import SendRequest
 class GetAccounts(object):
 
     def __init__(self):
-        machine = 0     #   machine = 1   # 1 for west, 0 for kathy
+        machine = 1     #   machine = 1   # 1 for west, 0 for kathy
 
         settings_d, sender_etc_dd, self.receivers = master_setup(machine)
         self.chain, self.url3, self.sender, self.pw = unpack_d(settings_d, sender_etc_dd)
@@ -25,6 +25,7 @@ class GetAccounts(object):
         request = get_top(method_nm, p_list, self.url3)
         resp1, rstr = SendRequest.send_request(request)
         results_d = resp1.get("result")
+        print(results_d)
         return results_d
 
 

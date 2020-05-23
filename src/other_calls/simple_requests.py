@@ -29,6 +29,7 @@ class SimpleRequests(object):
         response_d = SendRequest.send_request(request)
 
         print("  ANSWER to query ", method_nm, " is: ")
+        print(url)
         print(" ---------> The response is: " + json.dumps(response_d) + " ---------> \n\n")
 
     def get_the_best_block(self):
@@ -46,6 +47,11 @@ class SimpleRequests(object):
         p = [self.chain, acct]
         self.doit(method_nm, p)
 
+    def get_accountLedgerList(self, acct):
+        method_nm = "getAccount"
+        p = [self.chain, acct]
+        self.doit(method_nm, p)
+
     def get_tx(self, tx_hash):
         method_nm = "getTx"
         p = [self.chain, tx_hash]
@@ -54,6 +60,8 @@ class SimpleRequests(object):
 
 if __name__ == "__main__":
     s = SimpleRequests()
-    s.get_account('TTbKRT4vrHMQdyQCATrdu6godeo1FJWSFVVk')
-    s.get_chain_info()
+    # s.get_account('MWTIdGs2sv2p82qEM7mehidAPHSnJKaXi5pPv')
+    # s.get_chain_info()
+    s.get_the_best_block()
+
 
