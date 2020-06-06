@@ -33,7 +33,7 @@ cryptography==2.7
 cssselect==1.0.3
 cycler==0.10.0
 decorator==4.4.1
-Django==3.0.2
+Django==3.0.7
 docutils==0.15.2
 easygui==0.98.1
 elasticsearch==7.6.0
