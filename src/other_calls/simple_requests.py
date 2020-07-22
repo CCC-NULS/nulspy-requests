@@ -9,7 +9,7 @@ from src.libs.send_req import SendRequest
 class SimpleRequests(object):
 
     def __init__(self):
-        machine = 1     #   machine = 1   # 1 for west, 0 for kathy
+        machine = 1     #   machine = 1   # 1 for west
 
         settings_d, sender_etc_dd, self.receivers = master_setup(machine)
         self.chain, self.url3, self.sender, self.pw = unpack_d(settings_d, sender_etc_dd)
@@ -62,6 +62,6 @@ if __name__ == "__main__":
     s = SimpleRequests()
     # s.get_account('MWTIdGs2sv2p82qEM7mehidAPHSnJKaXi5pPv')
     # s.get_chain_info()
-    s.get_the_best_block()
+    s.get_chain_info()
 
 

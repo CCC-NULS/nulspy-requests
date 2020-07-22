@@ -7,10 +7,10 @@ def get_sender_etc_dict(machine):
     sender_etc_d = None
     if machine == 1:
         sender_etc_d = {
-            'sender': 'TTbKRT4vrHMQdyQCATrdu6godeo1FJWSFVpk',
-            'pw': 'nuls123456',
-            'buyer': 'TTSETeCA3FWQ3Y32TCFEwJvzqGbxiXNxtkzPb3z',
-            'contract': 'TTSETeCA3FWQ3Y32TCFEwJvzqGbxiXNxtkzPb3z'
+            'sender': 'SPEXdKRT4vPJW8DCGUDkGH34Wc6AV9qoWjNhDx',  # owner of contract
+            'pw': 'kathy123',
+            'buyer': 'SPEXdKRT4nfcKKVqSt1XLdJYMp2H1nwy3oZ1nJ',
+            'contract': 'SPEXdKRT4yJrChYu5KfusRJrLMpJ8qRmitSHxe'  # july 22
             }
 
     elif machine == 0:

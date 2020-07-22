@@ -32,7 +32,7 @@ class GetContractProdIds(object):
 
 if __name__ == "__main__":
     prods_obj = GetContractProdIds()
-    contract_id = "TTbKRT5DVddw7rDN1UrS9Wo3xGLFszwYwMLR"
+    contract_id = "SPEXdKRT4yJrChYu5KfusRJrLMpJ8qRmitSHxe"
 
     g = prods_obj.get_contract_prod_ids(contract_id)
     print(g)

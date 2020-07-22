@@ -84,6 +84,9 @@ class CheckContract(object):
 
 if __name__ == "__main__":
     c = CheckContract()
+    contract
+    address: SPEXdKRT4yJrChYu5KfusRJrLMpJ8qRmitSHxe
+
     ctr = 'TTbKRT5DVddw7rDN1UrS9Wo3xGLFszwYwMLR'
     r = c.view_reviews(ctr)
     json_formatted_str = json.dumps(r, indent=2)
