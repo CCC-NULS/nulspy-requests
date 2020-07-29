@@ -4,7 +4,7 @@
 from src.libs.master_setup import master_setup, unpack_d
 from src.libs.setup_top import get_top
 from src.libs.send_req import SendRequest
-
+from json import dumps
 
 class GetAccounts(object):
 
@@ -20,15 +20,19 @@ class GetAccounts(object):
 
     def getaccounts(self):
         method_nm = "getAccountList"
-        length = 287
+        length = 999
         p_list = [self.chain, self.asset, length]
         request = get_top(method_nm, p_list, self.url3)
         resp1, rstr = SendRequest.send_request(request)
         results_d = resp1.get("result")
-        print(results_d)
         return results_d
 
 
 if __name__ == "__main__":
     c = GetAccounts()
-    c.getaccounts()
+    res = c.getaccounts()['list']
+
+    for i in res:
+        print("'" + i['address'] + "',")
+
+    # print(dumps(res['list'][0], indent=2))

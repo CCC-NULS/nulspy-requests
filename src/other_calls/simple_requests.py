@@ -27,10 +27,11 @@ class SimpleRequests(object):
             url = self.url3
         request = get_top(method_nm, p_list, url)
         response_d = SendRequest.send_request(request)
-
+        print("query: " + str(request))
         print("  ANSWER to query ", method_nm, " is: ")
         print(url)
         print(" ---------> The response is: " + json.dumps(response_d) + " ---------> \n\n")
+        return response_d
 
     def get_the_best_block(self):
         method_nm = "getBestBlockHeader"
@@ -55,8 +56,8 @@ class SimpleRequests(object):
     def get_accountContractList(self, aclistt):
         method_nm = "getContractListById"
         # params:  {"pageNumber": 1, "pageSize": 10, "totalCount": 9,
-        p = [self.chain, 1, 1, 1, aclistt]
-        self.doit(method_nm, p)
+        p = [self.chain, 1, 10, 99, aclistt]
+        return self.doit(method_nm, p)
 
     def get_tx(self, tx_hash):
         method_nm = "getTx"
@@ -66,14 +67,30 @@ class SimpleRequests(object):
 
 if __name__ == "__main__":
     s = SimpleRequests()
-    # s.get_account('MWTIdGs2sv2p82qEM7mehidAPHSnJKaXi5pPv')
-    # s.get_chain_info()
 
-    aclist = ["SPEXdKRT4vPJW8DCGUDkGH34Wc6AV9qoWjNhDx"]  # Dx owns the contract
-    aclist3 = ["SPEXdKRT4nfcKKVqSt1XLdJYMp2H1nwy3oZ1nJ", "SPEXdKRT4vPJW8DCGUDkGH34Wc6AV9qoWjNhDx"]
 
-    aclist2 = ["SPEXdKRT5CAcVEKc3h9K2PEAbAuW6cJtH6N7ib", "SPEXdKRT4xiWRCGCjRuUPQ2BsGyxDL84KDMjBC", "SPEXdKRT4xgSXmwosD3aiiGBNHdf8a2qQnZ1fd", "SPEXdKRT5BpHUMnX458jFosfEDNjo7Fi7DJznB",
-              "SPEXdKRT5DwQ9w7vyZxotvjci4e6JrSA3DLuey", "SPEXdKRT5A8nue3HMGy9dwRMziautTLE27jKpv", "SPEXdKRT524CVkUBewXCrnNpV9SMnwKqA2fj4f", "SPEXdKRT54LQChhXy491qdJ1vXXAjjXNUSY2km",
-              "SPEXdKRT4yQDZXwNJJQn3HbAGBR4p8QMKvZBVC", "SPEXdKRT4vPJW8DCGUDkGH34Wc6AV9qoWjNhDx"]
-    s.get_accountContractList(aclist)
+
+    aclist = ['SPEXdKRT4iLwhSaXEhLDR4YNL9WkKsPRjKWb4z',
+                'SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa',
+                'SPEXdKRT4u1Y38BVnjxCcnY33E5y3e3rfnwNv3',
+                'SPEXdKRT4yQDZXwNJJQn3HbAGBR4p8QMKvZBVC']
+
+
+    aclist2 = ['SPEXdKRT4iLwhSaXEhLDR4YNL9WkKsPRjKWb4z',
+                'SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa',
+                'SPEXdKRT4pGVg9GtgGfRDQFaf4AmrAFTAXuUT2',
+                'SPEXdKRT4wm7SWpCpXG3wx3MXQYjNHjS6jfvFa',
+                'SPEXdKRT4u6T3EXZh5q5iGyQnSfwJCr5V9kbbx',
+                'SPEXdKRT4kJjyhR9zmvJxegVFWAQsJU7XtYhrQ',
+                'SPEXdKRT4nb7khepQhJDchEpi44tyAPzBXDv8C',
+                'SPEXdKRT4rR2CvNhzH5koTn8BsVKAsxhx8jkjs',
+                'SPEXdKRT4u1Y38BVnjxCcnY33E5y3e3rfnwNv3',
+                'SPEXdKRT4yQDZXwNJJQn3HbAGBR4p8QMKvZBVC']
+
+    res = s.get_accountContractList(aclist)[0].get('result').get('list')
+    print("contractAdddress                        creater                                 alias  balance of contract")
+    for i in res:
+        mystr = i.get('contractAddress') + ", " + i.get('creater') + ", " + i.get('alias') + ", " + str(i.get('balance'))
+        print(mystr)
+
 
