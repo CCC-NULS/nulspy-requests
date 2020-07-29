@@ -68,22 +68,8 @@ class SimpleRequests(object):
 if __name__ == "__main__":
     s = SimpleRequests()
 
-
-
     aclist = ['SPEXdKRT4iLwhSaXEhLDR4YNL9WkKsPRjKWb4z',
                 'SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa',
-                'SPEXdKRT4u1Y38BVnjxCcnY33E5y3e3rfnwNv3',
-                'SPEXdKRT4yQDZXwNJJQn3HbAGBR4p8QMKvZBVC']
-
-
-    aclist2 = ['SPEXdKRT4iLwhSaXEhLDR4YNL9WkKsPRjKWb4z',
-                'SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa',
-                'SPEXdKRT4pGVg9GtgGfRDQFaf4AmrAFTAXuUT2',
-                'SPEXdKRT4wm7SWpCpXG3wx3MXQYjNHjS6jfvFa',
-                'SPEXdKRT4u6T3EXZh5q5iGyQnSfwJCr5V9kbbx',
-                'SPEXdKRT4kJjyhR9zmvJxegVFWAQsJU7XtYhrQ',
-                'SPEXdKRT4nb7khepQhJDchEpi44tyAPzBXDv8C',
-                'SPEXdKRT4rR2CvNhzH5koTn8BsVKAsxhx8jkjs',
                 'SPEXdKRT4u1Y38BVnjxCcnY33E5y3e3rfnwNv3',
                 'SPEXdKRT4yQDZXwNJJQn3HbAGBR4p8QMKvZBVC']
 
