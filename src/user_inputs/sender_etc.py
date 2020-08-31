@@ -21,5 +21,12 @@ def get_sender_etc_dict(machine):
             'contract': 'TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM' #?
             }
 
+    elif machine > 1:
+        sender_etc_d = {
+            'sender': 'TTSETeCA3FWPueNuqEcKUNoxsuKZArhTA7Q2ccZ',
+            'pw': 'xyzxyz123',
+            'buyer': 'TTSETeCA3FWPueNuqEcKUNoxsuKZArhTA7Q2ccZ',
+            'contract': '' #?
+            }
     return sender_etc_d
 

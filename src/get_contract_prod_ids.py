@@ -32,8 +32,9 @@ class GetContractProdIds(object):
 
 if __name__ == "__main__":
     prods_obj = GetContractProdIds()
-    contract_id = "SPEXdKRT4yJrChYu5KfusRJrLMpJ8qRmitSHxe"
-
+    # old july: contract_id = "SPEXdKRT4yJrChYu5KfusRJrLMpJ8qRmitSHxe"
+    contract_id = "SPEXdKRT4zmkrCMcwQKfWEQfmCCKSboHp4TCdC"  #new aug10
+    ## contract_id = "SPEXdKRT4zmkrCMcwQKfWEQfmCCKSboHp4TCdC"  #new aug10
     g = prods_obj.get_contract_prod_ids(contract_id)
     print(g)
 

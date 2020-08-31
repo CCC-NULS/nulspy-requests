@@ -86,9 +86,11 @@ if __name__ == "__main__":
     c = CheckContract()
 
     # address: SPEXdKRT4yJrChYu5KfusRJrLMpJ8qRmitSHxe
+      # SPEXdKRT4zmkrCMcwQKfWEQfmCCKSboHp4TCdC
+    # SPEXdKRT4zmkrCMcwQKfWEQfmCCKSboHp4TCdC
+    ctr = 'SPEXdKRT4zmkrCMcwQKfWEQfmCCKSboHp4TCdC'
 
-    ctr = 'SPEXdKRT4yJrChYu5KfusRJrLMpJ8qRmitSHxe'
-    r = c.view_reviews(ctr)
+    r = c.req_get_contract(ctr)
     json_formatted_str = json.dumps(r, indent=2)
     print(json_formatted_str)
 
