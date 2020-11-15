@@ -119,21 +119,21 @@ class SimpleRequests(object):
                 # nine items worked sort of [1, 0, 10, address, 0, starth, endh, 1, 1]
 
 if __name__ == "__main__":
-    s = SimpleRequests(4, 4810, 'url3')   # machine, chainid  west:  4, 4810
+    s = SimpleRequests(3, 2, 'url3')   # machine, chainid  west:  4, 4810
     # s.SimpleRequests(2, 'POST')   # 4 = POST
+# note in ver 2.5 everything is POST, never get, most are 8003, some 8004
 
-
-    s.get_account('SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh', 'POST', 'url3')
+    #s.get_account('SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa', 'POST', 'url3')
     #s.get_AccountTxs('SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh')
     # s.get_cmds()
-    s.getBlockHeaderList()
-    s.getBlockByHeight(900000)
+    #s.getBlockHeaderList()
+    #s.getBlockByHeight(900000)
     #s.getTx()
-    s.get_the_best_block('POST', 'url3')
-    s.get_account_ledger_list(['SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh'], 'POST', 'url3')
+    #s.get_the_best_block('POST', 'url3')
+    #s.get_account_ledger_list(['SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa'], 'POST', 'url3')
 
     s.get_chain_info('POST', 'url3')  # post-4 or get-3
-    s.get_accountContractList('SPEXdKRT4wqaQkYBM8bFm9PyyTumB6GgXSQ57G', 'POST', 'url3')  # post-4 or get-3
+    #s.get_accountContractList('SPEXdKRT4wqaQkYBM8bFm9PyyTumB6GgXSQ57G', 'POST', 'url3')  # post-4 or get-3
 
 #":"getAccountTxs","params":[4810,1,5,"SPEXdKRT4qzoF5iR4ZPJMJUrh3tqihUZy7pS4q",0,-1,-1],"id":932}
 #

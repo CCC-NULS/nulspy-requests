@@ -10,13 +10,13 @@ def get_settings(machine=0, cid=1, urltype='url3'):
     machine3 = "http://public1.nuls.io"
     machine3 = "http://public2.nuls.io"
     machine3 = "http://beta.public1.nuls.io"  # use chain 2
-    machine3 = "http://beta.public1.nuls.io"  # use chain 2
     #machine3 = "http://beta.nulscan.io/api"   # is ok!!  sometimes...
 
     machine3775 = "http://beta.public1.nuls.io" # bad
     machine37 = "http://beta.api.nuls.io"  #bad
     machine37777 = "http://beta.pocm.nuls.io"  #bad
     machine3 = "http://beta.nerve.network"   # is ok!!
+    machine3 = "http://beta.public1.nuls.io"  # use chain 2
 
     machine4 = "http://westteam.nulstar.com"
 
@@ -47,9 +47,9 @@ def get_settings(machine=0, cid=1, urltype='url3'):
 
     elif machine == 3:
         if urltype == 'url3':
-            url = f"{machine3}:{port3}"
+            url = f"{machine3}"
         else:
-            url = f"{machine3}:{port4}"
+            url = f"{machine3}"
         settings_main_dd = {"cid": cid, "url": url}
         return settings_main_dd
 

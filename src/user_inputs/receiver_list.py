@@ -6,7 +6,7 @@ def get_receiver_list():   ## use 'inputlist' as official name of list you want 
     #receiver_list = ['tNULSeBaMmcZwwSz1tPGVkfuZKSCQnQS5BzrTL']  # receiver is beta tNULSeBaMmcZwwSz1tPGVkfuZKSCQnQS5BzrTL
     #xferlist = ['tNULSeBaMjt1dKbRYDcCv6XDSeEots1Nfr42aM']
 
-    receiver_list = ['SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh']  # westteam SPEXdKRT4ja5aFgREi6HhnxcGPyVi8yfpDvSys
+    receiver_list = ['SPEXdKRT4ja5aFgREi6HhnxcGPyVi8yfpDvSys']  # westteam SPEXdKRT4ja5aFgREi6HhnxcGPyVi8yfpDvSys
        #westteam sender: SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7
     return receiver_list
 

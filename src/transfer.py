@@ -20,7 +20,7 @@ class Transfer(object):
         self.cid, self.url = unpack_d(settings_main_dd)
 
         self.sender, self.pw = unpack_etc(sender_etc_dd)
-        self.remark = "get list of accounts"
+        self.remark = "transfer"
         self.assetid = 1
         self.id = 999
 
@@ -32,18 +32,19 @@ class Transfer(object):
         multiplier = 10**8
         amt = base_amt * multiplier
         # amt = 2000 * (10**8) - 2000
+        amt = base_amt
 
         for receiver in self.receivers:
             print("doing this receiver: ", receiver)
-            p_list = [self.cid, self.cid, self.sender, receiver, self.pw, amt, self.remark]
+            p_list = [self.cid, self.cid, self.sender, receiver, self.pw, base_amt, self.remark]
             request = get_top(method_nm, p_list, self.url, meth_type)
             resp1, rstr = SendRequest.send_request(request)
             print("resp1: ", rstr)
 
 
 if __name__ == "__main__":
-    c = Transfer(4, 4810, 'url4')  # 4 = westteam  # put machine here, 4=westteam
-    c.transfer(2, 'POST')   # 4 = POST
+    c = Transfer(4, 4810, 'url4')  # 4 = westteam  # put machine here, 4=westteam  almost works with url4
+    c.transfer(1, 'POST')   # 4 = POST
 
 # transfer "SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa" "SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7" 1
 

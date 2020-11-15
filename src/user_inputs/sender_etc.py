@@ -37,9 +37,9 @@ def get_sender_etc_dict(machine):
             }
     elif machine == 4:  # westteam
         sender_etc_d = {
-            'sender': 'SPEXdKRT4wqaQkYBM8bFm9PyyTumB6GgXSQ57G',
+            'sender': 'SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa',
             'pw': 'kathy123',
-            'buyer': 'SPEXdKRT4wqaQkYBM8bFm9PyyTumB6GgXSQ57G',
+            'buyer': 'SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa',
             'contract': '',  # ?
         }
     return sender_etc_d

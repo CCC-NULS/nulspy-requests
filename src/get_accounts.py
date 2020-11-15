@@ -4,30 +4,42 @@
 from src.libs.master_setup import master_setup, unpack_d, unpack_etc
 from src.libs.setup_top import get_top
 from src.libs.send_req import SendRequest
+import json
 
 
 class GetAccounts(object):
 
-    def __init__(self, machine=0, chainid=0):
-        settings_main_dd, sender_etc_dd, self.receivers = master_setup(machine, chainid, )
+    def __init__(self, machine=0, chainid=0, urltype='url3'):
+        settings_main_dd, sender_etc_dd, self.receivers = master_setup(machine, chainid, urltype)
         self.cid, self.url = unpack_d(settings_main_dd)
         self.sender, self.pw = unpack_etc(sender_etc_dd)
         self.remark = "get list of accounts"
         self.assetid = 1
-        self.id = 99999
+        self.id = 999
 
-    def getaccounts(self, urltype=3, meth_type='POST'):  # 4=POST, 3=GET
+    def getaccounts(self, meth_type='POST'):  # 4=POST, 3=GET
         method_nm = "getAccountList"
         length = 99999
         p_list = [self.cid, self.assetid, length]
-        request = get_top(method_nm, p_list, self.url3, 4)
-        resp1, rstr = SendRequest.send_request(request)
-        results_d = resp1.get("result")
-        return results_d
+        request = get_top(method_nm, p_list, self.url, meth_type)  # 0 = get, 1=post
+        print("method_nm: " + str(method_nm) + "  meth_type: " + str(meth_type))
+        print("query: " + str(request))
+        json_formatted_str = json.dumps(request.json, indent=2)
+        print(json_formatted_str)
+        response_d = SendRequest.send_request(request)
+        print("  ANSWER to query ", method_nm, " is: ")
+        # print(urltype)
+        print(" ---------> The response is: " + json.dumps(response_d) + " ---------> \n\n")
+        return response_d
+
+
+        # resp1, rstr = SendRequest.send_request(request)
+        # results_d = resp1.get("result")
+        # return results_d
 
 
 if __name__ == "__main__":
-    c = GetAccounts(4, 4810)   # machine, chainid
+    c = GetAccounts(3, 2)   # machine, chainid
     results = c.getaccounts()['list']
 
     for i in results:
