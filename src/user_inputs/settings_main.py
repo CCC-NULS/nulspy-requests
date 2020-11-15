@@ -1,13 +1,13 @@
 #!/usr/bin/python3.7
 
 
-def get_settings(machine):
-    port3 = "18003"
+def get_settings(machine, chainid=2):
+    port3 = "8003"
     port4 = "8004"
-    chain = 2
+    chain = chainid
     machine0 = "http://78.47.206.255"
     machine2 = "http://127.2.0.1"
-    machine399 = "http://public1.pocm.nuls.io"
+    machine1 = "http://public1.pocm.nuls.io"
     machine3 = "http://public1.nuls.io"
     machine3 = "http://public1.nuls.io"
     machine3 = "https://wallet.nuls.io"
@@ -57,7 +57,7 @@ def get_settings(machine):
     elif machine == 3:
         port3 = "8003"
         port4 = "8004"
-        chain3 = 2
+        chain3 = chainid
         # url33 = f"{machine3}:{port3}"
         # url43 = f"{machine3}:{port4}/jsonrpc"
         # # url33 = f"{machine3}:{port3}"
@@ -68,7 +68,7 @@ def get_settings(machine):
         return settings_d
 
     elif machine == 4:   # westteam
-        chain4 = 4810
+        chain4 = chainid
         port3 = "8003"
         port4 = "8004"
         url34 = f"{machine4}:{port3}"

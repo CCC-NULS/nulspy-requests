@@ -8,16 +8,17 @@ from src.libs.send_req import SendRequest
 
 class SimpleRequests(object):
 
-    def __init__(self):
-        machine = 3     #   machine = 1   # 1 for west  4=real nuls
+    def __init__(self, machine=4, chainid=2):
+        #machine = 4     #   machine = 1   # 1 for west  4=real nuls
 
-        settings_d, sender_etc_dd, self.receivers = master_setup(machine)
-        self.chain, self.url3, self.sender, self.pw = unpack_d(settings_d, sender_etc_dd)
+        settings_d, sender_etc_dd, self.receivers = master_setup(machine, chainid)
+        self.unused, self.url3, self.sender, self.pw = unpack_d(settings_d, sender_etc_dd)
         self.url4 = settings_d.get('url4')
-        self.remark = "transfer to account"
+        self.remark = "request"
         # self.asset = 1
         self.id = 99999
-        
+        self.chain = chainid
+
         self.emp_list = []
 
     def doit(self, method_nm, p_list, method_type=4):   #use url for url4
@@ -36,24 +37,28 @@ class SimpleRequests(object):
         return response_d
 
     def get_the_best_block(self):
-        self.chain = 2
         meth_type = 4  # 4 = POST
         method_nm = "getBestBlockHeader"
         p = [self.chain]
         self.doit(method_nm, p, meth_type)
 
-    def get_chain_info(self):   # now works best with 8004
-        #method_nm = "info"  # getChainInfo   # info works on westteam on 8004
-        method_nm = "getChainInfo"  # getChainInfo   # info works on westteam on 8004
-        meth_type = 4  # 4 = POST
-        self.chain = 2
+    def get_chain_info(self, meth_type=4):   # now works best with 8004
+        method_nm = "info"  # getChainInfo   # info works on westteam on 8004
+        #method_nm = "getChainInfo"  # getChainInfo   # info works on westteam on 8004
+        #meth_type = 4  # 4 = POST
         p = [self.chain]
         self.doit(method_nm, p, meth_type)   # four=1 for 8004 or 18004
 
     def get_account(self, acct):
+        meth_type = 3  # 4 = POST   3=GET
         method_nm = "getAccount"
+        print("chainid:  ", self.chain)
         p = [self.chain, acct]
-        self.doit(method_nm, p)
+        self.doit(method_nm, p, meth_type)
+
+    #def get_accountList(self):
+        # see program file with this name
+
 
     def get_accountLedgerList(self, acct):
         method_nm = "getAccount"
@@ -124,17 +129,17 @@ class SimpleRequests(object):
                 # nine items worked sort of [1, 0, 10, address, 0, starth, endh, 1, 1]
 
 if __name__ == "__main__":
-    s = SimpleRequests()
-    # s.get_account('xyz')
-    #s.get_AccountTxs()
+    s = SimpleRequests(4, 4810)   # mach, chainid  west:  4, 4810
+    #s.get_account('SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh')
+    #s.get_AccountTxs('SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh')
     # s.get_cmds()
     # s.getBlockPackageTxCount()
     # s.getBlockByHeight(900000)
     #s.getTx()
     # s.getBlockHeaderList()
-    s.get_the_best_block()
+    s.get_accountLedgerList('SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh')
 
-    s.get_chain_info()
+    #s.get_chain_info(4)
 
 #d07fc0d0f5e840b4fa8c924b4361faa0bc4c030e47a0402460c87eb2be97ee03
 

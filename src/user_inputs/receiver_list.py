@@ -3,21 +3,33 @@
 
 def get_receiver_list():   ## use 'inputlist' as official name of list you want to use, rename the others
 
-    receiver_list = ['tNULSeBaMmcZwwSz1tPGVkfuZKSCQnQS5BzrTL']  # receiver is beta tNULSeBaMmcZwwSz1tPGVkfuZKSCQnQS5BzrTL
-    xferlist = ['tNULSeBaMjt1dKbRYDcCv6XDSeEots1Nfr42aM']
+    #receiver_list = ['tNULSeBaMmcZwwSz1tPGVkfuZKSCQnQS5BzrTL']  # receiver is beta tNULSeBaMmcZwwSz1tPGVkfuZKSCQnQS5BzrTL
+    #xferlist = ['tNULSeBaMjt1dKbRYDcCv6XDSeEots1Nfr42aM']
 
+    receiver_list = ['SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh']  # westteam SPEXdKRT4ja5aFgREi6HhnxcGPyVi8yfpDvSys
+       #westteam sender: SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7
     return receiver_list
+
+    # 'SPEXdKRT4sX9XTHvyP5qBKsZGihgUVdNVmWihL',
+    # 'SPEXdKRT5ANiZNnLuRuFSKsqY4nX4twQ88vhb5',
+    # 'SPEXdKRT4wqaQkYBM8bFm9PyyTumB6GgXSQ57G',
+    # 'SPEXdKRT4vwmpHZiufc7SWSW69AFw6x39uJZZE',
+    # 'SPEXdKRT4ja5aFgREi6HhnxcGPyVi8yfpDvSys',
+    # 'SPEXdKRT4yvkvyWr4iGamMDKGzhiGgkjDYtZfR',
+    # 'SPEXdKRT54LQChhXy491qdJ1vXXAjjXNUSY2km',
+    # 'SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh',
+    # 'SPEXdKRT51rgzKMchGYbNQ5pkDGuFjy7xaxJEZ',
+    # 'SPEXdKRT5AavVv9Czg7XbRgo8EaVe5aX5ypoTJ',
+
+
+
+
+
+
 
     #
     # xferlist = ['TTbKRT4nxYfyWgATiHh3dZBrpFe2osT6H21B',
-    #             'TTbKRT4o2Wm5aejgdV3pxC2jVYw5DzGsFzj5',
     #             'TTbKRT4oNGc58s1K6zw3AUbcfJr9V7SU3WKv',
-    #             'TTbKRT4u1cND3XGYg6F2KxACcg6e3uewwJ2y',
-    #             'TTbKRT4vzTPhYDqdXCCDJuXUKvPNoTjFqXJm',
-    #             'TTbKRT4wkUjLYmWeT4faSPWxYdBGtt41AcM3',
-    #             'TTbKRT4xBpnSBEvVqvbbRRXjPEBAkKnL2XGS',
-    #             'TTbKRT4o2PPpu3xuKLWCbY1Y6mbmNPB6Gxst',
-    #             'TTbKRT4oqYmhia4jG8kbBjGzS5Skx59Q94ej',
     #             'TTbKRT4vMkq94SLRCZFgRQpQ252SejJQnZrR',
     #             'TTbKRT4hTEmtvqcsh6KujDc7ndB4Y3TcPkbY']
 

@@ -15,10 +15,10 @@ from src.libs.send_req import SendRequest
 
 class Transfer(object):
 
-    def __init__(self):
-        machine = 3     #   machine = 1   # 4 for west,
+    def __init__(self, machine=4, chainid=4810):
+        #machine = 4     #   machine = 1   # 4 for west,
 
-        settings_d, sender_etc_dd, self.receivers = master_setup(machine)
+        settings_d, sender_etc_dd, self.receivers = master_setup(machine, chainid)
         self.chain, self.url3, self.sender, self.pw = unpack_d(settings_d, sender_etc_dd)
         self.url4 = settings_d.get('url4')
         self.remark = 'xfer'
@@ -40,16 +40,17 @@ class Transfer(object):
             #   p_list = [self.chain, self.asset, self.sender, receiver, self.pw, amt, self.remark]
             #2, 2, 1,
             #p_list = [chainId, assetChainId, self.sender, receiver, self.pw, amt, self.remark]
-            p_list = [2, 1, self.sender, receiver, self.pw, amt, self.remark]
+            p_list = [4810, 1, self.sender, receiver, self.pw, amt, self.remark]
             request = get_top(method_nm, p_list, self.url4)
             resp1, rstr = SendRequest.send_request(request)
             print("resp1: ", rstr)
 
 
 if __name__ == "__main__":
-    c = Transfer()
-    c.transfer(4)
+    c = Transfer(4)   # put machine here, 4=westteam
+    c.transfer()
 
+# transfer "SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa" "SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7" 1
 
 
 '''

@@ -7,10 +7,10 @@ import src.user_inputs.sender_etc as sender_etc
 import src.user_inputs.receiver_list as receiver_list
 
 
-def master_setup(machine):
+def master_setup(machine, chainid):
     SetupLogging()
-    settings_d = settings.get_settings(machine)
-    sender_etc_dd = sender_etc.get_sender_etc_dict(machine)
+    settings_d = settings.get_settings(machine, chainid)
+    sender_etc_dd = sender_etc.get_sender_etc_dict(machine, chainid)
     receivers = receiver_list.get_receiver_list()
     return settings_d, sender_etc_dd, receivers
 

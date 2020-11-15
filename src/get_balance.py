@@ -9,7 +9,7 @@ from src.libs.send_req import SendRequest
 class GetBalance(object):
 
     def __init__(self):
-        machine = 3     #   machine = 1   # 1 for west, 0 for kathy
+        machine = 4     #   machine = 1   # 1 for west, 0 for kathy
 
         settings_d, sender_etc_dd, self.receivers = master_setup(machine)
         self.chain, self.url3, self.sender, self.pw = unpack_d(settings_d, sender_etc_dd)

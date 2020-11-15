@@ -14,3 +14,6 @@ class SendRequest(object):
         results_d = json.loads(response.text)
         print(the_request.body)
         return results_d, response.text
+
+
+# works  transfer "SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa" "SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7" 1

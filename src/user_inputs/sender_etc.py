@@ -3,7 +3,7 @@
 # usage:  from src.user_inputs.input_singles import AddressSingles;  dict = AddressSingles.get_addresses()
 
 
-def get_sender_etc_dict(machine):
+def get_sender_etc_dict(machine, chainid):
     sender_etc_d = None
     if machine == 1:
         sender_etc_d = {
@@ -33,14 +33,18 @@ def get_sender_etc_dict(machine):
             'sender': 'tNULSeBaMpxUVQLW9J3AzbjFsQVRpC5RAnxVKz',  #  tNULSeBaMpxUVQLW9J3AzbjFsQVRpC5RAnxVKz
             'pw': 'kathy123',
             'buyer': 'tNULSeBaMjt1dKbRYDcCv6XDSeEots1Nfr42aM',
-            'contract': '' #?
+            'contract': '', #?
+            'chainid': chainid
             }
-    elif machine == 4: # westteam
+    elif machine == 4:  # westteam
         sender_etc_d = {
-            'sender': 'tNULSeBaMjt1dKbRYDcCv6XDSeEots1Nfr42aM',
-            'pw': 'dev123dev',
-            'buyer': 'tNULSeBaMjt1dKbRYDcCv6XDSeEots1Nfr42aM',
-            'contract': ''  # ?
+            'sender': 'SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7',
+            'pw': 'kathy123',
+            'buyer': 'SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7',
+            'contract': '',  # ?
+            'chainid': chainid
         }
     return sender_etc_d
 
+    # receiver_list = ['SPEXdKRT4ja5aFgREi6HhnxcGPyVi8yfpDvSys']  # westteam SPEXdKRT4ja5aFgREi6HhnxcGPyVi8yfpDvSys
+       #westteam sender: SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7
