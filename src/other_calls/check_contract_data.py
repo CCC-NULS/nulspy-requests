@@ -83,12 +83,12 @@ class CheckContract(object):
 
 
 if __name__ == "__main__":
+    ctr = 'SPEXdKRT4zmkrCMcwQKfWEQfmCCKSboHp4TCdC'
     c = CheckContract()
-
     # address: SPEXdKRT4yJrChYu5KfusRJrLMpJ8qRmitSHxe
       # SPEXdKRT4zmkrCMcwQKfWEQfmCCKSboHp4TCdC
     # SPEXdKRT4zmkrCMcwQKfWEQfmCCKSboHp4TCdC
-    ctr = 'SPEXdKRT4zmkrCMcwQKfWEQfmCCKSboHp4TCdC'
+    r = c.req_get_all_prod_ids(ctr)
 
     r = c.req_get_contract(ctr)
     json_formatted_str = json.dumps(r, indent=2)

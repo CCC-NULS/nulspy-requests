@@ -21,12 +21,26 @@ def get_sender_etc_dict(machine):
             'contract': 'TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM' #?
             }
 
-    elif machine > 1:
+    elif machine > 9:
         sender_etc_d = {
             'sender': 'TTSETeCA3FWPueNuqEcKUNoxsuKZArhTA7Q2ccZ',
             'pw': 'xyzxyz123',
             'buyer': 'TTSETeCA3FWPueNuqEcKUNoxsuKZArhTA7Q2ccZ',
             'contract': '' #?
             }
+    elif machine == 3:
+        sender_etc_d = {
+            'sender': 'tNULSeBaMpxUVQLW9J3AzbjFsQVRpC5RAnxVKz',  #  tNULSeBaMpxUVQLW9J3AzbjFsQVRpC5RAnxVKz
+            'pw': 'kathy123',
+            'buyer': 'tNULSeBaMjt1dKbRYDcCv6XDSeEots1Nfr42aM',
+            'contract': '' #?
+            }
+    elif machine == 4: # westteam
+        sender_etc_d = {
+            'sender': 'tNULSeBaMjt1dKbRYDcCv6XDSeEots1Nfr42aM',
+            'pw': 'dev123dev',
+            'buyer': 'tNULSeBaMjt1dKbRYDcCv6XDSeEots1Nfr42aM',
+            'contract': ''  # ?
+        }
     return sender_etc_d
 

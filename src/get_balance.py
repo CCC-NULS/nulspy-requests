@@ -9,7 +9,7 @@ from src.libs.send_req import SendRequest
 class GetBalance(object):
 
     def __init__(self):
-        machine = 1     #   machine = 1   # 1 for west, 0 for kathy
+        machine = 3     #   machine = 1   # 1 for west, 0 for kathy
 
         settings_d, sender_etc_dd, self.receivers = master_setup(machine)
         self.chain, self.url3, self.sender, self.pw = unpack_d(settings_d, sender_etc_dd)
@@ -20,7 +20,9 @@ class GetBalance(object):
     def get_account_balance(self):
         method_nm = "getAccountBalance"
         for receiver in self.receivers:
-            p_list = [self.chain, self.chain, self.asset, receiver]
+            p_list = [2, 2, 1, receiver, "remark"]
+
+            #p_list = [self.chain, self.chain, self.asset, receiver]
             request = get_top(method_nm, p_list, self.url3)
             response = SendRequest.send_request(request)
             results_d, rstr = json.loads(response.text)

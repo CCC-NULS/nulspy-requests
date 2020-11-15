@@ -12,5 +12,5 @@ class SendRequest(object):
         session = requests.Session()
         response = session.send(the_request)
         results_d = json.loads(response.text)
-        print()
+        print(the_request.body)
         return results_d, response.text
