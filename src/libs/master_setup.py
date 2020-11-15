@@ -1,29 +1,28 @@
 from src.libs.setup_log import SetupLogging
-# from src.libs.setup_top import get_top
-# from src.libs.send_req import SendRequest
 import src.user_inputs.settings_main as settings
 
 import src.user_inputs.sender_etc as sender_etc
 import src.user_inputs.receiver_list as receiver_list
 
 
-def master_setup(machine, chainid):
+def master_setup(machine, cid):
     SetupLogging()
-    settings_d = settings.get_settings(machine, chainid)
-    sender_etc_dd = sender_etc.get_sender_etc_dict(machine, chainid)
+    settings_main_dd = settings.get_settings(machine, cid)
+    sender_etc_dd = sender_etc.get_sender_etc_dict(machine)
     receivers = receiver_list.get_receiver_list()
-    return settings_d, sender_etc_dd, receivers
+    return settings_main_dd, sender_etc_dd, receivers
 
 
-def unpack_d(settingsd, sender_etc_dd):
-    chain = settingsd.get('chain')
-    url3 = settingsd.get('url3')
-    # sender = sender_etc_dd.get('tNULSeBaMjt1dKbRYDcCv6XDSeEots1Nfr42aM')
-    # pw = sender_etc_dd.get('dev123dev')
+def unpack_d(settings_main_dd):
+    cid = settings_main_dd.get('cid')
+    url3 = settings_main_dd.get('url3')
+    url4 = settings_main_dd.get('url4')
+    print("cid: ", cid, " url3: ", url3, " url4: ", url4)
+    return cid, url3, url4
+
+
+def unpack_etc(sender_etc_dd):
     sender = sender_etc_dd.get('sender')
     pw = sender_etc_dd.get('pw')
-    print("sender: ", sender)
-    # print("url3: ", url3)
-    print("chain: ", chain)
-    print("pw: ", pw)
-    return chain, url3, sender, pw
+    print("sender: ", sender, " pw: ", pw)
+    return sender, pw
