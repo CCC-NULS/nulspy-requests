@@ -31,12 +31,12 @@ class SimpleRequests(object):
         print(" ---------> The response is: " + json.dumps(response_d) + " ---------> \n\n")
         return response_d
 
-    def get_the_best_block(self, meth_type='POST', urltype='url3'):
+    def get_the_best_block(self, meth_type='POST'):
         method_nm = "getBestBlockHeader"
         p = [self.cid]
         self.doit(method_nm, p, meth_type)
 
-    def get_chain_info(self, meth_type=4, urltype='url3'):   # now works best with 8004
+    def get_chain_info(self, meth_type=4):   # now works best with 8004
         method_nm = "getInfo"  # getChainInfo   # info works on westteam on 8004  'info'
         if meth_type == 3:
             method_nm = "getChainInfo"  # getChainInfo   # info works on westteam on 8004
@@ -44,29 +44,29 @@ class SimpleRequests(object):
         p = [self.cid]
         self.doit(method_nm, p, meth_type)   # four=1 for 8004 or 18004
 
-    def get_account(self, acct, meth_type='POST', urltype='url3'):
+    def get_account(self, acct, meth_type='POST'):
         method_nm = "getAccount"
         print("chainid:  ", self.cid)
         p = [self.cid, acct]
         self.doit(method_nm, p, meth_type)
 
-    def get_account_ledger_list(self, acct, meth_type='POST', urltype='url3'):
+    def get_account_ledger_list(self, acct, meth_type='POST'):
         method_nm = "getAccountLedgerList"
         p = [self.cid, acct]
         self.doit(method_nm, p, meth_type)
 
-    def get_accountContractList(self, aclistt, meth_type='POST', urltype='url3'):
+    def get_accountContractList(self, aclistt, meth_type='POST'):
         method_nm = "getContractListById"
         # params:  {"pageNumber": 1, "pageSize": 10, "totalCount": 9,
         p = [self.cid, 1, 10, 99, [aclistt]]
         self.doit(method_nm, p, meth_type)
 
-    def get_tx(self, tx_hash, meth_type='POST', urltype='url3'):
+    def get_tx(self, tx_hash, meth_type='POST'):
         method_nm = "getTx"
         p = [self.cid, tx_hash]
         self.doit(method_nm, p, meth_type)
 
-    def get_BlockByHash(self, tx_hash=0,  meth_type='POST', urltype='url3'):
+    def get_BlockByHash(self, tx_hash=0,  meth_type='POST'):
         if not tx_hash:
             tx_hash = 'x'
         method_nm = "getBlockByHash"
@@ -75,35 +75,35 @@ class SimpleRequests(object):
         # 7875b8be73fa1e436b3f04a9b5ec913a7a306c0e8978c360b1778c8ee06a12ad
         # blockhash for block 262078
 
-    def getBlockPackageTxCount(self, meth_type='POST', urltype='url3'):
+    def getBlockPackageTxCount(self, meth_type='POST'):
         method_nm = "getBlockTxCount"
         p = [self.cid, 900000, 900001]
         self.doit(method_nm, p, meth_type)
 
-    def getBlockByHeight(self, height=0, meth_type='POST', urltype='url3'):
+    def getBlockByHeight(self, height=0, meth_type='POST'):
         if not height:
             height = '900000'
         method_nm = "getBlockByHeight"
         p = [self.cid, height]
         self.doit(method_nm, p, meth_type)
 
-    def getTx(self, tx_hash=0, meth_type='POST', urltype='url3'):
+    def getTx(self, tx_hash=0, meth_type='POST'):
         if not tx_hash:
-            tx_hash = '2fc7919bf68919bac6e1a2b02d179dcbd2e8ca3d72a2e214b16312e83d86449b'
+            tx_hash = 'b1e340841f8b5f7d1e2cf20ce6edb6d6f0122bfe299f00c975616d8459ab5ba0'
         method_nm = "getTx"
         p = [self.cid, tx_hash]
         self.doit(method_nm, p, meth_type)
         # 2fc7919bf68919bac6e1a2b02d179dcbd2e8ca3d72a2e214b16312e83d86449b
         # blockhash for block 262078
 
-    def getBlockHeaderList(self, meth_type='POST', urltype='url3'):
+    def getBlockHeaderList(self, meth_type='POST'):
         method_nm = "getBlockHeaderList"
         #  [chainId,pageNumber,pageSize, isHidden, packedAddress],
         p = [1, 0, 100, False, 'NULSd6Hgeiej8U4JUtWrLTx9nNKFoyfSC3LdS']
         self.doit(method_nm, p, meth_type)
 
 
-    def get_AccountTxs(self, meth_type='POST', urltype='url3'):
+    def get_AccountTxs(self, meth_type='POST'):
         method_nm = "getAccountTxs"
         #"params": [chainId, pageNumber, pageSize, address, txType, startHeight, endHeight],
         #    "params":[chainId,pageNumber,pageSize,address,txType,startHeight, endHeight],
@@ -131,8 +131,8 @@ if __name__ == "__main__":
     #s.getTx()
     #s.get_the_best_block('POST', 'url3')
     #s.get_account_ledger_list(['SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa'], 'POST', 'url3')
-
-    s.get_chain_info('POST', 'url3')  # post-4 or get-3
+    #s.getTx()
+    s.get_chain_info('POST')  # post-4 or get-3
     #s.get_accountContractList('SPEXdKRT4wqaQkYBM8bFm9PyyTumB6GgXSQ57G', 'POST', 'url3')  # post-4 or get-3
 
 #":"getAccountTxs","params":[4810,1,5,"SPEXdKRT4qzoF5iR4ZPJMJUrh3tqihUZy7pS4q",0,-1,-1],"id":932}
@@ -155,10 +155,12 @@ if __name__ == "__main__":
 
 # 'SPEXdKRT5AavVv9Czg7XbRgo8EaVe5aX5ypoTJ',
 
+# beta.public1.nuls.io:
+# beta chain from:   tNULSeBaMpxUVQLW9J3AzbjFsQVRpC5RAnxVKz
+# beta chain from:   tNULSeBaMpxUVQLW9J3AzbjFsQVRpC5RAnxVKz
 
-
-
-
+# beta to:    tNULSeBaMmcZwwSz1tPGVkfuZKSCQnQS5BzrTL
+# beta to:    tNULSeBaMmcZwwSz1tPGVkfuZKSCQnQS5BzrTL
 
 
 

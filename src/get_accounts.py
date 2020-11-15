@@ -33,11 +33,6 @@ class GetAccounts(object):
         return response_d
 
 
-        # resp1, rstr = SendRequest.send_request(request)
-        # results_d = resp1.get("result")
-        # return results_d
-
-
 if __name__ == "__main__":
     c = GetAccounts(3, 2)   # machine, chainid
     results = c.getaccounts()['list']

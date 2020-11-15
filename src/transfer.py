@@ -43,11 +43,14 @@ class Transfer(object):
 
 
 if __name__ == "__main__":
-    c = Transfer(4, 4810, 'url4')  # 4 = westteam  # put machine here, 4=westteam  almost works with url4
+    # c = Transfer(4, 4810, 'url4')  # 4 = westteam  # put machine here, 4=westteam  almost works with url4
+    c = Transfer(3, 2)  # 3 = beta  # put machine here
     c.transfer(1, 'POST')   # 4 = POST
 
 # transfer "SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa" "SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7" 1
 
+#beta from tNULSeBaMpxUVQLW9J3AzbjFsQVRpC5RAnxVKz   to
+# beta to:    tNULSeBaMmcZwwSz1tPGVkfuZKSCQnQS5BzrTL
 
 '''
 chainId	int	chain id	yes

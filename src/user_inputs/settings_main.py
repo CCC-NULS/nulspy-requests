@@ -17,6 +17,7 @@ def get_settings(machine=0, cid=1, urltype='url3'):
     machine37777 = "http://beta.pocm.nuls.io"  #bad
     machine3 = "http://beta.nerve.network"   # is ok!!
     machine3 = "http://beta.public1.nuls.io"  # use chain 2
+    #machine3 = "http://beta.wallet.nuls.io"  # use chain 2
 
     machine4 = "http://westteam.nulstar.com"
 
