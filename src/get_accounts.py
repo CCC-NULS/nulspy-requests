@@ -9,18 +9,18 @@ from src.libs.send_req import SendRequest
 class GetAccounts(object):
 
     def __init__(self, machine=0, chainid=0):
-        settings_main_dd, sender_etc_dd, self.receivers = master_setup(machine, chainid)
-        self.cid, self.url3, self.url4 = unpack_d(settings_main_dd)
+        settings_main_dd, sender_etc_dd, self.receivers = master_setup(machine, chainid, )
+        self.cid, self.url = unpack_d(settings_main_dd)
         self.sender, self.pw = unpack_etc(sender_etc_dd)
         self.remark = "get list of accounts"
         self.assetid = 1
         self.id = 99999
 
-    def getaccounts(self):
+    def getaccounts(self, urltype=3, meth_type='POST'):  # 4=POST, 3=GET
         method_nm = "getAccountList"
         length = 99999
         p_list = [self.cid, self.assetid, length]
-        request = get_top(method_nm, p_list, self.url4)
+        request = get_top(method_nm, p_list, self.url3, 4)
         resp1, rstr = SendRequest.send_request(request)
         results_d = resp1.get("result")
         return results_d

@@ -2,7 +2,7 @@
 
 # setup:  enter list in input_lists
 
-from src.libs.master_setup import master_setup, unpack_d
+from src.libs.master_setup import master_setup, unpack_d, unpack_etc, ret_url
 from src.libs.setup_top import get_top
 from src.libs.send_req import SendRequest
 
@@ -15,40 +15,35 @@ from src.libs.send_req import SendRequest
 
 class Transfer(object):
 
-    def __init__(self, machine=4, chainid=4810):
-        #machine = 4     #   machine = 1   # 4 for west,
+    def __init__(self, machine=0, chainid=0, urltype='url3'):
+        settings_main_dd, sender_etc_dd, self.receivers = master_setup(machine, chainid, urltype)
+        self.cid, self.url = unpack_d(settings_main_dd)
 
-        settings_d, sender_etc_dd, self.receivers = master_setup(machine, chainid)
-        self.chain, self.url3, self.sender, self.pw = unpack_d(settings_d, sender_etc_dd)
-        self.url4 = settings_d.get('url4')
-        self.remark = 'xfer'
-        self.asset = 1
-        self.id = 99999
+        self.sender, self.pw = unpack_etc(sender_etc_dd)
+        self.remark = "get list of accounts"
+        self.assetid = 1
+        self.id = 999
 
-    def transfer(self, base_amt):      #ch assetid address toaddy pw amt rem
+    def transfer(self, base_amt, meth_type='POST'):      #ch assetid address toaddy pw amt rem
         method_nm = 'transfer'
-        chainId = 2
-        assetChainId = 1
-        assetId = 1
+        # assetChainId = self.cid
+        asset_id = 1
 
         multiplier = 10**8
         amt = base_amt * multiplier
-        #amt = 2000 * (10**8) - 2000
+        # amt = 2000 * (10**8) - 2000
 
         for receiver in self.receivers:
             print("doing this receiver: ", receiver)
-            #   p_list = [self.chain, self.asset, self.sender, receiver, self.pw, amt, self.remark]
-            #2, 2, 1,
-            #p_list = [chainId, assetChainId, self.sender, receiver, self.pw, amt, self.remark]
-            p_list = [4810, 1, self.sender, receiver, self.pw, amt, self.remark]
-            request = get_top(method_nm, p_list, self.url4)
+            p_list = [self.cid, self.cid, self.sender, receiver, self.pw, amt, self.remark]
+            request = get_top(method_nm, p_list, self.url, meth_type)
             resp1, rstr = SendRequest.send_request(request)
             print("resp1: ", rstr)
 
 
 if __name__ == "__main__":
-    c = Transfer(4)   # put machine here, 4=westteam
-    c.transfer()
+    c = Transfer(4, 4810, 'url4')  # 4 = westteam  # put machine here, 4=westteam
+    c.transfer(2, 'POST')   # 4 = POST
 
 # transfer "SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa" "SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7" 1
 

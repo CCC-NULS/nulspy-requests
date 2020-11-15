@@ -4,10 +4,10 @@ import requests
 import random
 
 
-def get_top(method, plist, url, met_type=4):
-    method_type = 'GET'
-    if met_type == 4:
-        method_type = 'POST'
+def get_top(method, plist, url, met_type='POST'):
+    method_type = 'POST'
+    if met_type == 3:
+        method_type = 'GET'
     print("method_type is:  ", method_type)
     idd = 900000 + random.randrange(1, 99)
     head = dict([("Content-Type", "application/json;charset=UTF-8",)])
