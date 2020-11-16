@@ -2,6 +2,8 @@
 
 import requests
 import random
+import logging
+import time
 
 
 def get_top(method, plist, url, met_type='POST'):
@@ -14,3 +16,18 @@ def get_top(method, plist, url, met_type='POST'):
     reqr = requests.Request(method_type, url, headers=head)
     reqr.json = {"jsonrpc": "2.0", "method": method, "params": plist, "id": idd}
     return reqr
+
+
+def setup_logging():
+    the_level = logging.INFO
+    tss = str(time.time())[:9]
+    fname = "balanceTransfers" + tss + ".log"
+    logging.basicConfig(filename=fname, level=the_level)
+
+# class SetupLog:
+#     @staticmethod
+#     def setup_logging():
+#         the_level = logging.INFO
+#         tss = str(time.time())[:9]
+#         fname = "balanceTransfers" + tss + ".log"
+#         logging.basicConfig(filename=fname, level=the_level)

@@ -44,11 +44,3 @@ def get_sender_etc_dict(machine):
         }
     return sender_etc_d
 
-    # receiver_list = ['SPEXdKRT4ja5aFgREi6HhnxcGPyVi8yfpDvSys']  # westteam SPEXdKRT4ja5aFgREi6HhnxcGPyVi8yfpDvSys
-       #westteam sender: SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7
-
-
-# real accts:
-# 'SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh',   *
-# 'SPEXdKRT4wqaQkYBM8bFm9PyyTumB6GgXSQ57G',  *
-# 'SPEXdKRT4ja5aFgREi6HhnxcGPyVi8yfpDvSys',   *

@@ -2,7 +2,7 @@
 
 # setup:  enter list in input_lists
 
-from src.libs.master_setup import master_setup, unpack_d, unpack_etc, ret_url
+from src.libs.master_setup import master_setup, unpack_d, unpack_etc
 from src.libs.setup_top import get_top
 from src.libs.send_req import SendRequest
 
@@ -26,13 +26,9 @@ class Transfer(object):
 
     def transfer(self, base_amt, meth_type='POST'):      #ch assetid address toaddy pw amt rem
         method_nm = 'transfer'
-        # assetChainId = self.cid
-        asset_id = 1
-
         multiplier = 10**8
         amt = base_amt * multiplier
         # amt = 2000 * (10**8) - 2000
-        amt = base_amt
 
         for receiver in self.receivers:
             print("doing this receiver: ", receiver)
@@ -47,10 +43,7 @@ if __name__ == "__main__":
     c = Transfer(3, 2)  # 3 = beta  # put machine here
     c.transfer(1, 'POST')   # 4 = POST
 
-# transfer "SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa" "SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7" 1
 
-#beta from tNULSeBaMpxUVQLW9J3AzbjFsQVRpC5RAnxVKz   to
-# beta to:    tNULSeBaMmcZwwSz1tPGVkfuZKSCQnQS5BzrTL
 
 '''
 chainId	int	chain id	yes

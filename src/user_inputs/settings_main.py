@@ -8,17 +8,16 @@ def get_settings(machine=0, cid=1, urltype='url3'):
     machine2 = "http://127.2.0.1"
     machine1 = "http://public1.pocm.nuls.io"
     machine3 = "http://public1.nuls.io"
-    machine3 = "http://public2.nuls.io"
     machine3 = "http://beta.public1.nuls.io"  # use chain 2
-    #machine3 = "http://beta.nulscan.io/api"   # is ok!!  sometimes...
+    #machine3 = "http://beta.nulscan.io/api"
 
-    machine3775 = "http://beta.public1.nuls.io" # bad
-    machine37 = "http://beta.api.nuls.io"  #bad
-    machine37777 = "http://beta.pocm.nuls.io"  #bad
-    machine3 = "http://beta.nerve.network"   # is ok!!
-    machine3 = "http://beta.public1.nuls.io"  # use chain 2
+    machine3775 = "http://beta.public1.nuls.io"
+    machine37 = "http://beta.api.nuls.io"
+    machine37777 = "http://beta.pocm.nuls.io"
+    machine3 = "http://beta.nerve.network"
     #machine3 = "http://beta.wallet.nuls.io"  # use chain 2
 
+    machine3 = "http://beta.public1.nuls.io"  # use chain 2
     machine4 = "http://westteam.nulstar.com"
 
 

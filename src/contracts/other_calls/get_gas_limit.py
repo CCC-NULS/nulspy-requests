@@ -1,8 +1,6 @@
 #!/usr/bin/python3.7
 
-import requests
-from src.libs.send_req import SendRequest
-from src.user_inputs.address_list import Inputs
+
 from src.libs.setup_log import SetupLogging
 from src.user_inputs.settings_main import SettingsSet
 from src.libs.setup_top import SetupTop
@@ -15,8 +13,8 @@ class GetGasLimit(object):
         s = SettingsSet()
 
         ## -- comment in/out only these for each machine k or w
-        accts = s.accts_w
-        settings = s.settings_w
+        # accts = s.accts_w
+        # settings = s.settings_w
         accts = s.accts_k
         settings = s.settings_k
 

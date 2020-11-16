@@ -1,12 +1,11 @@
-from src.libs.setup_log import SetupLogging
+from src.libs.setup_top import setup_logging
 import src.user_inputs.settings_main as settings
-
 import src.user_inputs.sender_etc as sender_etc
 import src.user_inputs.receiver_list as receiver_list
 
 
 def master_setup(machine, cid, urltype='url3'):
-    SetupLogging()
+    # setup_logging()
     settings_main_dd = settings.get_settings(machine, cid, urltype)
     sender_etc_dd = sender_etc.get_sender_etc_dict(machine)
     receivers = receiver_list.get_receiver_list()
