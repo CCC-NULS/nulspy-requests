@@ -20,6 +20,19 @@ class SimpleRequests(object):
         request = get_top(method_nm, p_list, self.url, method_type)  # 0 = get, 1=post
         response_d = SendRequest.send_request(request)
 
+        parta = response_d[0]  # dict
+        # partb = response_d[1]  # str
+
+        myresults = parta['result']
+        alist = myresults['txList']
+
+        for txdict in alist:
+            if txdict['coinTos']:
+                newlistofd = txdict['coinTos']
+                for item in newlistofd:
+                    print(item['address'])
+
+
         print("-----------------------new query-----------\n" + "url:  " + self.url)
         print("method_nm: " + str(method_nm) + " method_type: " + str(method_type))
         print("query: " + str(request))
@@ -33,6 +46,7 @@ class SimpleRequests(object):
 
     def get_chain_info(self, meth_type='POST'):   # now works best with 8004
         method_nm = "getInfo"  # getChainInfo   # info works on westteam on 8004  'info'
+        method_nm = "getChainInfo"  # getChainInfo   # info works on westteam on 8004  'info'
         # method_nm = "getChainInfo"  # getChainInfo   # info works on westteam on 8004
             # method_nm = "getInfo"  # getChainInfo   # info works on westteam on 8004
         self.doit(method_nm, [self.cid], meth_type)   # four=1 for 8004 or 18004
@@ -96,8 +110,8 @@ class SimpleRequests(object):
         method_nm = "getAccountTxs"
         #"params": [chainId, pageNumber, pageSize, address, txType, startHeight, endHeight],
         # params above are incomplete - it wants 9 items
-        starth = 409112
-        endh = 3041625
+        starth = 3737222
+        endh = 3737239
         pi = 1         # page index
         pss = 10       # item count displayed in each page 1-1000
         ttype = 0           # type=0 is all transactions  16=call contract
@@ -106,13 +120,24 @@ class SimpleRequests(object):
                 # nine items worked sort of [1, 0, 10, address, 0, starth, endh, 1, 1]
 
 if __name__ == "__main__":
-    s = SimpleRequests(3, 2, 'url3')   # machine, chainid  west:  4, 4810
+    s = SimpleRequests(3, 9, 'url4')   # machine, chainid  west:  4, 4810
     # s.SimpleRequests(2, 'POST')   # 4 = POST
     # note in ver 2.5 everything is POST, never get, most are 8003, some 8004
 
-    s.get_account('SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa', 'POST',)
-    s.get_account_txs('SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh', 'POST',)
-    #s.getBlockHeaderList()
-    s.get_block_by_height(900000)
-    s.get_the_best_block('POST')
-    s.get_chain_info('POST')  # post-4 or get-3
+    # s.get_account('SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa', 'POST',)
+    # s.get_account_txs('SPEXdKRT4kGmFz68ChyJrcjzFfggb8b1aNyaKh', 'POST',)
+    # #s.getBlockHeaderList()
+    # s.get_block_by_height(900000)
+    # s.get_the_best_block('GET')
+    felip60 = "NULSd6HgdYVWejHNewWwf4Ux2n1mWJMGFoKsE"
+    joaogift = "e3b34c61bfccba72bd602c480418bd7f86732421214581b440e577d51454d4a6"
+
+    nerve_tx_felip60 = "d052211a462dbc37dae063b664ddba3861c13ae3b7ca4672a754a65ae224"
+    #s.get_chain_info('POST')  # post- get-
+    # s.get_account_txs(felip60, 'POST')  # post- get-
+    #s.get_tx(nerve_tx_felip60, 'POST')  # post- get-
+    s.get_block_by_height('5613686', 'POST')
+    s.get_block_by_height('5613687', 'POST')
+    #s.get_block_by_hash('c1ef5a323b802f58abe2437c39371eb47f626c348886aecd69c0e63750fe3963', 'GET')
+
+    #s.get_tx('73e5d052211a462dbc37dae063b664ddba3861c13ae3b7ca4672a754a65ae224')

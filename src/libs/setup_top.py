@@ -7,9 +7,7 @@ import time
 
 
 def get_top(method, plist, url, met_type='POST'):
-    method_type = 'POST'
-    if met_type == 3:
-        method_type = 'GET'
+    method_type = met_type
     print("method_type is:  ", method_type)
     idd = 900000 + random.randrange(1, 99)
     head = dict([("Content-Type", "application/json;charset=UTF-8",)])

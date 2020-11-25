@@ -8,12 +8,13 @@ class SendRequest(object):
 
     @staticmethod
     def send_request(req):
+        the_response = None
         the_request = req.prepare()
         session = requests.Session()
-        response = session.send(the_request)
-        results_d = json.loads(response.text)
+        the_response = session.send(the_request)
+        results_d = json.loads(the_response.text)
         print(the_request.body)
-        return results_d, response.text
+        return results_d, the_response.text
 
 # works  transfer "SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa" "SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7" 1
 # SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa
