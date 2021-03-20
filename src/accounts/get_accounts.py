@@ -2,7 +2,7 @@
 
 
 from src.libs.master_setup import master_setup, unpack_d, unpack_etc
-from src.libs.setup_top import get_top
+from src.libs.setup_top import prepare_top_section
 from src.libs.send_req import SendRequest
 import json
 
@@ -18,10 +18,15 @@ class GetAccounts(object):
         self.id = 999
 
     def getaccounts(self, meth_type='POST'):  # 4=POST, 3=GET
-        method_nm = "getAccountList"
-        length = 99999
-        p_list = [self.cid, self.assetid, length]
-        request = get_top(method_nm, p_list, self.url, meth_type)  # 0 = get, 1=post
+        # method_nm = "getAccountList"
+        method_nm = "getAddressList"
+        # https://github.com/nuls-io/nuls-v2/blob/6d15d6917239dbc8c65d7674c9db704d683e043f/account/nuls-account/src/main/java/io/nuls/account/rpc/cmd/AccountCmd.java
+        page_number = 1
+        page_size = 99999
+                                # p_list = [self.tchain_id, self.assetid, length]
+        p_list = [self.cid, page_number, page_size]
+                                # [chainId, pageNumber, pageSize]
+        request = prepare_top_section(method_nm, p_list, self.url, meth_type)  # 0 = get, 1=post
         print("method_nm: " + str(method_nm) + "  meth_type: " + str(meth_type))
         print("query: " + str(request))
         json_formatted_str = json.dumps(request.json, indent=2)
@@ -34,11 +39,15 @@ class GetAccounts(object):
 
 
 if __name__ == "__main__":
-    c = GetAccounts(3, 2)   # machine, chainid
-    results = c.getaccounts()['list']
+    # c = GetAccounts(4, 1, urltype='url4')   # machine, chainid
+    c = GetAccounts(4, 1, urltype='url4')   # machine, chainid
+    # results = c.getaccounts()['list']
+    results_dict = c.getaccounts()[0]
+    print('accounts: ')
+    rlist = results_dict.get('result')
 
-    for i in results:
-        print("'" + i['address'] + "',")
+    for i in rlist:
+        print(i)
 
     # print(dumps(res['list'][0], indent=2))
 

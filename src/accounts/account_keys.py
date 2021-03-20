@@ -1,7 +1,7 @@
 #!/usr/bin/python3.7
 
 from src.libs.master_setup import master_setup, unpack_d
-from src.libs.setup_top import get_top
+from src.libs.setup_top import prepare_top_section
 from src.libs.send_req import SendRequest
 import logging
 
@@ -22,21 +22,21 @@ class AccountKeys(object):
         method_nm = "getPriKey"
 
         p_list = [self.chain, addr, pww]
-        request = get_top(method_nm, p_list, self.url4)
+        request = prepare_top_section(method_nm, p_list, self.url4)
         resp_d, rstr = SendRequest.send_request(request)
         return resp_d.get('result')
 
     def get_account_byprikey(self, pk):
         method_nm = "getAddressByPriKey"
         p_list = [self.chain, pk]
-        request = get_top(method_nm, p_list, self.url3)
+        request = prepare_top_section(method_nm, p_list, self.url3)
         resp_d, rstr = SendRequest.send_request(request)
         return resp_d.get('result')
 
     def import_pri_key(self, pri_key):
         method_nm = "importPriKey"
         p_list = [self.chain, pri_key, self.pw]
-        request = get_top(method_nm, p_list, self.url3)
+        request = prepare_top_section(method_nm, p_list, self.url3)
         resp_d, rstr = SendRequest.send_request(request)
         return resp_d.get('result')
 

@@ -1,7 +1,7 @@
 #!/usr/bin/python3.7
 
 from src.libs.master_setup import master_setup, unpack_d
-from src.libs.setup_top import get_top
+from src.libs.setup_top import prepare_top_section
 from src.libs.send_req import SendRequest
 
 
@@ -23,7 +23,7 @@ class GetContractProdIds(object):
         contract_methodname = "getAllProductIds"
         args = []
         p_list = [self.chain, contract, contract_methodname, return_type, args]
-        request = get_top(method_nm, p_list, self.url3)
+        request = prepare_top_section(method_nm, p_list, self.url3)
         resp1 = SendRequest.send_request(request)
         # results_d, rstr = resp1.get("result")
         print(resp1)

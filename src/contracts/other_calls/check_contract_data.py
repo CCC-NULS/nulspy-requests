@@ -5,7 +5,7 @@
 
 
 from src.libs.master_setup import master_setup, unpack_d, unpack_etc
-from src.libs.setup_top import get_top
+from src.libs.setup_top import prepare_top_section
 from src.libs.send_req import SendRequest
 import json
 
@@ -21,10 +21,10 @@ class CheckContract:
         self.id = 99999
         self.emp_list = []
 
-    # def doit(self, method_nm, p_list, four=0):   #use url for url4
-    def doit(self, method_nm, p_list, method_type='POST'):  # use url for url4
+    # def doit(self, method_nm, p_list, four=0):   #use myurl for url4
+    def doit(self, method_nm, p_list, method_type='POST'):  # use myurl for url4
 
-        request = get_top(method_nm, p_list, self.url, method_type)  # 0 = get, 1=post
+        request = prepare_top_section(method_nm, p_list, self.url, method_type)  # 0 = get, 1=post
         the_answer = SendRequest.send_request(request)
         print("stat: ", the_answer)
         print("  ANSWER to query ", method_nm, " is: ")

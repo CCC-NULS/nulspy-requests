@@ -8,7 +8,6 @@ class SendRequest(object):
 
     @staticmethod
     def send_request(req):
-        the_response = None
         the_request = req.prepare()
         session = requests.Session()
         the_response = session.send(the_request)

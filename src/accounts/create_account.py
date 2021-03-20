@@ -3,7 +3,7 @@
 
 import logging
 from src.libs.master_setup import master_setup, unpack_d
-from src.libs.setup_top import get_top
+from src.libs.setup_top import prepare_top_section
 from src.libs.send_req import SendRequest
 from src.accounts.account_keys import AccountKeys
 
@@ -27,7 +27,7 @@ class CreateAccount(object):
         for i in range(rg):
             method_nm = "createAccount"
             p_list = [self.chain, 1, self.pw]
-            request = get_top(method_nm, p_list, self.url4)
+            request = prepare_top_section(method_nm, p_list, self.url4)
             response, rstr  = SendRequest.send_request(request)
             results_d = response.get("result")
 

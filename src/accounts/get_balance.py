@@ -2,13 +2,13 @@
 
 import json
 from src.libs.master_setup import master_setup, unpack_d
-from src.libs.setup_top import get_top
+from src.libs.setup_top import prepare_top_section
 from src.libs.send_req import SendRequest
 
 
 class GetBalance(object):
 
-    def __init__(self, machine=4, chainid=2):  # cid=chainId
+    def __init__(self, machine=4, chainid=2):  # tchain_id=chainId
         settings_d, sender_etc_dd, self.receivers = master_setup(machine, chainid)
         self.unused, self.url3, self.sender, self.pw = unpack_d(settings_d, sender_etc_dd)
         self.url4 = settings_d.get('url4')
@@ -31,7 +31,7 @@ class GetBalance(object):
             p_list = [self.chainid, self.assetChainId, self.assetId, receiver, "nmsTx"]
 
             #p_list = [self.chain, self.chain, self.asset, receiver]
-            request = get_top(method_nm, p_list, self.url3)
+            request = prepare_top_section(method_nm, p_list, self.url3)
             response = SendRequest.send_request(request)
             results_d, rstr = json.loads(response.text)
 

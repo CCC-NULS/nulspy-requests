@@ -1,7 +1,7 @@
 #!/usr/bin/python3.7
 
 from src.libs.master_setup import master_setup, unpack_d
-from src.libs.setup_top import get_top
+from src.libs.setup_top import prepare_top_section
 from src.libs.send_req import SendRequest
 
 
@@ -30,7 +30,7 @@ class CallContract(object):
         contract_methodname = "writeReview"
         p_list = [self.chain, self.sender, self.pw, value_asset, gas_limit, gas_price,
                   self.contract, contract_methodname, self.contract_desc, args, remark]
-        request = get_top(method_nm, p_list, self.url4)
+        request = prepare_top_section(method_nm, p_list, self.url4)
         resp1 = SendRequest.send_request(request)
         results_d, rstr = resp1.get("result")
         print(rstr)

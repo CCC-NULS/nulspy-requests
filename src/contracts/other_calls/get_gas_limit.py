@@ -19,7 +19,7 @@ class GetGasLimit(object):
         settings = s.settings_k
 
         self.chainId = settings('chain')
-        self.url = settings('url')
+        self.url = settings('myurl')
         self.pw = settings('pw')
         self.sender = accts.get('sender')
         self.sender = accts.get('receiver')

@@ -3,7 +3,7 @@
 # setup:  enter list in input_lists
 
 from src.libs.master_setup import master_setup, unpack_d, unpack_etc
-from src.libs.setup_top import get_top
+from src.libs.setup_top import prepare_top_section
 from src.libs.send_req import SendRequest
 
 
@@ -33,7 +33,7 @@ class Transfer(object):
         for receiver in self.receivers:
             print("doing this receiver: ", receiver)
             p_list = [self.cid, self.cid, self.sender, receiver, self.pw, base_amt, self.remark]
-            request = get_top(method_nm, p_list, self.url, meth_type)
+            request = prepare_top_section(method_nm, p_list, self.url, meth_type)
             resp1, rstr = SendRequest.send_request(request)
             print("resp1: ", rstr)
 

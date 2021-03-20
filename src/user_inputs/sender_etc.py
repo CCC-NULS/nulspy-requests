@@ -26,7 +26,7 @@ def get_sender_etc_dict(machine):
             'sender': 'TTSETeCA3FWPueNuqEcKUNoxsuKZArhTA7Q2ccZ',
             'pw': 'xyzxyz123',
             'buyer': 'TTSETeCA3FWPueNuqEcKUNoxsuKZArhTA7Q2ccZ',
-            'contract': '' # ?
+            'contract': ''  # ?
             }
     elif machine == 3:
         sender_etc_d = {
@@ -38,6 +38,13 @@ def get_sender_etc_dict(machine):
     elif machine == 4:  # westteam
         sender_etc_d = {
             'sender': 'SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa',
+            'pw': 'kathy123',
+            'buyer': 'SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa',
+            'contract': '',  # ?
+        }
+    elif machine == 42:  # westteam with offline smart contract
+        sender_etc_d = {
+            'sender': 'SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa',  # change to NULS
             'pw': 'kathy123',
             'buyer': 'SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa',
             'contract': '',  # ?
