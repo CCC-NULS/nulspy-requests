@@ -9,6 +9,8 @@ class SendRequest(object):
     @staticmethod
     def send_request(req):
         the_request = req.prepare()
+        # the_request.set("path_url", 1)
+        # the_request.set("path_url", "")
         session = requests.Session()
         the_response = session.send(the_request)
         results_d = json.loads(the_response.text)

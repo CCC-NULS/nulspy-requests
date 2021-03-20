@@ -2,31 +2,46 @@
 
 
 def target_setup(machine=1, tchain_id=1, urltype='url3'):
+    print("urltype: ", urltype)
+    print("tchain_id: ", tchain_id)
     main_machine = ""
     port3 = "18003"
     port4 = "18004"
+    jsonr = "jsonrpc"
+    myurl = None
 
     if machine == 1:
+        main_machine = "https://public1.nuls.io"
+
         port3 = "8003"
         port4 = "8004"
-        main_machine = "https://public1.nuls.io"
-    elif machine == 4:
+
+        if urltype == 'url3':
+            myurl = f"{main_machine}"
+
+        elif urltype == 'url4':
+            myurl = f"{main_machine}"
+
+    elif machine == 3:
         main_machine = "http://westteam.nulstar.com"
+
         port3 = "18013"
         port4 = "18014"
 
+        if urltype == 'url3':
+            myurl = f"{main_machine}:{port3}/{jsonr}"
 
-    myurl = f"{main_machine}:{port3}"  # or: myurl = f"{main_machine}:{port4}/jsonrpc"
-    if urltype == 'url3':
-        myurl = f"{main_machine}:{port3}"
+        elif urltype == 'url4':
+            myurl = f"{main_machine}:{port4}"
 
-    elif urltype == 'url4':
-        print("using url4")
-        jsonr = "jsonrpc"
-        myurl = f"{main_machine}:{port4}/{jsonr}"
+    print("main_machine: ", main_machine)
+    print("tchain_id: ", tchain_id)
+    print("myurl: ", myurl)
+
 
     target_setup_dd = {"tchain_id": tchain_id, "myurl": myurl}  # mychain_id is usually 1, 4810 for SPEX
-    print("myurl: ", myurl)
+    print("final myurl: ", myurl)
+    print(" ")
     return target_setup_dd
 
 

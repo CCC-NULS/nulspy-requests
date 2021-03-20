@@ -8,7 +8,7 @@ from src.libs.send_req import SendRequest
 
 class SimpleRequests(object):
 
-    def __init__(self, machine=4, chainid=1, urltype='url4'):
+    def __init__(self, machine=4, chainid=1, urltype='url3'):
         settings_main_dd, sender_etc_dd, self.receivers = master_setup(machine, chainid, urltype)
         # machine is the server that is running the public blockchain api to query
 
@@ -21,12 +21,13 @@ class SimpleRequests(object):
         self.assetid = 1
         self.id = 999
 
-    def doit(self, method_name, parameter_list, method_type='POST'):
+    def doit(self, method_name, parameter_list=[], method_type='POST'):
         request = prepare_top_section(method_name, parameter_list, self.myurl, method_type)  # 0 = get, 1=post
+        print("running on this url:  " + self.myurl)
+
         response_tup = SendRequest.send_request(request)
         response_str = response_tup[1]  # str
         response_parsed = json.loads(response_str)
-
         print(json.dumps(response_parsed, indent=2, sort_keys=True))
                                                             # print("-----------------------new query-----------\n" + "myurl:  " + self.myurl) print("method_name: " + str(method_name) + " method_type: " + str(method_type)) print("query: " + str(request)) print(json.dumps(request.json, indent=2))
         print()                                                   # print("--------query: ", method_name + " response: " + json.dumps(response_d) + " ------>\n\n")
@@ -34,7 +35,8 @@ class SimpleRequests(object):
 
     def get_the_best_block(self, meth_type='POST'):
         method_nm = "getBestBlockHeader"
-        self.doit(method_nm, [self.tchain_id], meth_type)
+        param_list = [self.tchain_id]
+        self.doit(method_nm, param_list, meth_type)
 
     def get_account(self, acct, meth_type='POST'):
         method_nm = "getAccount"
@@ -67,8 +69,8 @@ class SimpleRequests(object):
 
     def get_block_by_height(self, height='900000', meth_type='POST'):
         method_nm = "getBlockByHeight"
-        p = [self.tchain_id, height]
-        biglist, anotherlist = self.doit(method_nm, p, meth_type)
+        param_list = [self.tchain_id, height]
+        biglist, anotherlist = self.doit(method_nm, param_list, meth_type)
         return biglist, anotherlist
 
     def get_tx(self, tx_hash, meth_type='POST'):
@@ -88,7 +90,7 @@ class SimpleRequests(object):
     def get_block_header_list(self, meth_type='POST'):
         method_nm = "getBlockHeaderList"
         # [chainId,pageNumber,pageSize, isHidden, packedAddress],
-        param_list = [1, 0, 100, False, 'NULSd6Hgeiej8U4JUtWrLTx9nNKFoyfSC3LdS']
+        param_list = [self.tchain_id, 0, 100, False, 'NULSd6Hgeiej8U4JUtWrLTx9nNKFoyfSC3LdS']
         self.doit(method_nm, param_list, meth_type)
 
     def get_account_txs(self, address='addresshere', meth_type='POST'):
@@ -106,30 +108,35 @@ class SimpleRequests(object):
 
     def get_chain_info_cs(self):
         method_nm = "cs_getChainInfo"  # getChainInfo
-        self.doit(method_nm, [self.tchain_id], 'POST')   # four=1 for 8004 or 18004
+        param_list = [self.tchain_id]
+        self.doit(method_nm, param_list, 'POST')   # four=1 for 8004 or 18004
 
 
-
-    def get_chain_info_info(self):  # now works best with 18004 docker wallet pro new code
+    def get_chain_info_info(self, meth_type='POST'):  # now works best with 18004 docker wallet pro new code
         method_nm = "info"
-        self.doit(method_nm, [self.tchain_id])
+        param_list = [self.tchain_id]
+        self.doit(method_nm, param_list, meth_type)
 
     def get_chain_info_get(self, meth_type='POST'):  # now works best with 8004
         # method_nm = "getInfo"  # getChainInfo   # info works on westteam on 8004 'info', info works for new wallet-pro docker
         # method_nm = "getChainInfo"  # getChainInfo   # info works on westteam on 8004  'info'
         # method_nm = "getInfo"  # getChainInfo   # info works on westteam on 8004
         method_nm = "getChainInfo"  # getChainInfo   # info works on westteam on 8004 for SPEX only
-        self.doit(method_nm, [self.tchain_id], meth_type)  # four=1 for 8004 or 18004
+        param_list = [self.tchain_id]
+        self.doit(method_nm, param_list, meth_type)  # four=1 for 8004 or 18004
 
-    def get_chain_cmd(self, method_nm="info"):  # now works best with 18004 docker wallet pro new code
-        self.doit(method_nm, [self.tchain_id])
+    def get_chain_cmd(self, method_nm="info", meth_type='POST'):  # now works best with 18004 docker wallet pro new code
+        param_list = [self.tchain_id]
+        self.doit(method_nm, param_list, meth_type)  # four=1 for 8004 or 18004
 
-    def get_chain_cmd4(self, method_nm="info"):  # now works best with 18004 docker wallet pro new code
-        self.doit(method_nm, [self.tchain_id])
+    def get_chain_cmd4(self, method_nm="info", meth_type='POST'):  # now works best with 18004 docker wallet pro new code
+        param_list = [self.tchain_id]
+        self.doit(method_nm, param_list, meth_type)  # four=1 for 8004 or 18004
 
-    def get_consensus_node_ct(self):
-        method_nm = "getConsensusNodeCount"
-        self.doit(method_nm, [self.tchain_id])  # [self.tchain_id], 'POST' are defaults
+    def get_getConsensusNodes(self, meth_type='POST'):
+        method_nm = "getConsensusNodes"
+        param_list = [self.tchain_id, 1, 99, 0]  # [chainId,pageNumber,pageSize,type],
+        self.doit(method_nm, param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
 
 if __name__ == "__main__":
     # s = SimpleRequests(4, 4810, 'url4')   # machine, chainid  west:  4, 4810
@@ -148,7 +155,6 @@ if __name__ == "__main__":
     # s.get_block_by_height(900000)
     # s.getBlockHeaderList()
     # s.get_the_best_block('GET')
-    #s.get_chain_info_get()
 
     # s.get_the_best_block()
     # s.get_consensus_node_ct()
@@ -156,17 +162,28 @@ if __name__ == "__main__":
     #s.get_chain_info_cs()
 
     # s.get_chain_cmd("getVersion")
-    s1 = SimpleRequests(1, 1, 'url3')   # machine=1 public1, chainid=1  west:  4,       nuls:1, 1
-  #  (self, machine=4, chainid=1, urltype='url4'):
-    # s4 = SimpleRequests(4, 1, 'url4')   # machine=4, chainid=1  west:  4,       nuls:1, 1
+    s1 = SimpleRequests(1, 1, 'url3')   # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
 
-    s1.get_chain_cmd(method_nm="consensusInfo")
-    s1.get_chain_cmd4(method_nm="getChainInfo")
+    s3 = SimpleRequests(3, 1, 'url3')  # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
+#  (self, machine=4, chainid=1, urltype='url4'):
+    #s4 = SimpleRequests(4, 1, 'url4')   # machine=4, chainid=1  west: 3,       nuls:1, 1
+    #s1.get_chain_info_get()
+    #s3.get_chain_info_get()
+
+    #s1.get_chain_cmd(method_nm="consensusInfo")
+    #s1.get_chain_cmd4(method_nm="getChainInfo")
 
     print()
+    # s3.get_block_by_height(3900000)  ## works
+    # s1.get_block_by_height(4000000)  # works
+    #s1.get_the_best_block()
+    s3.get_the_best_block()
 
+    #
+    # s4.get_chain_cmd("getBestBlockHeader")
+    #s3.get_chain_cmd("getAllAddressPrefix")  # works
+    #s3.get_getConsensusNodes()  # works
 
-    # s.get_chain_cmd("cs_getWholeInfo")
     # s.get_chain_cmd("cs_getRoundInfo")
     # s.get_chain_cmd("cs_getRoundInfo")
     # s.get_chain_info_cs()
