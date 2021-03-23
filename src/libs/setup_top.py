@@ -12,6 +12,11 @@ def prepare_top_section(method, param_list, the_url, method_type='POST'):
     my_request.json = {"jsonrpc": "2.0", "method": method, "params": param_list, "id": tmp_id}
     return my_request
 
+def prepare_top_plain(method, param_list, the_url, method_type='POST'):  # no method
+    tmp_id = 900000 + random.randrange(1, 99)
+    my_request = requests.Request(the_url, headers=dict([("Content-Type", "application/json;charset=UTF-8",)]))
+    my_request.json = param_list
+    return my_request
 
 def setup_logging():
     the_level = logging.INFO

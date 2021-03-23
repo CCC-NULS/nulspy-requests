@@ -2,9 +2,9 @@
 
 import json
 from src.libs.master_setup import master_setup
-from src.libs.setup_top import prepare_top_section
+from src.libs.setup_top import prepare_top_section, prepare_top_plain
 from src.libs.send_req import SendRequest
-
+import requests
 
 class SimpleRequests(object):
 
@@ -20,17 +20,47 @@ class SimpleRequests(object):
         self.remark = "get list of accounts"
         self.assetid = 1
         self.id = 999
+        self.special = 0
+
+
+    def add_up(self, response_dict2):
+        resp_list_of_d = response_dict2.get("result").get("list")
+        # print("-----------------------new query-----------\n" + "myurl:  " + self.myurl) print("method_name: " + str(method_name) + " method_type: " + str(method_type)) print("query: " + str(
+        # request)) print(json.dumps(request.json, indent=2))
+        bigtot = 0
+        for anode in resp_list_of_d:
+            tot_dep = anode.get("totalDeposit")
+
+            agent_alias = anode.get("agentAlias")
+            if not agent_alias:
+                agent_alias = "NoName Node"
+            newstr = agent_alias + ":  totalDeposit"
+            print(newstr, tot_dep)
+            bigtot += tot_dep
+
+        print()  # print("--------query: ", method_name + " response: " + json.dumps(response_d) + " ------>\n\n")
+        bt = bigtot / 100000000
+        print("total staked: ", bigtot)
+        f"{bt:,}"
+        print(f"{bt:,}")
 
     def doit(self, method_name, parameter_list=[], method_type='POST'):
-        request = prepare_top_section(method_name, parameter_list, self.myurl, method_type)  # 0 = get, 1=post
+        # request = prepare_top_section(method_name, parameter_list, self.myurl, method_type)  # 0 = get, 1=post
+        request = prepare_top_plain(parameter_list, self.myurl, method_type)
         print("running on this url:  " + self.myurl)
+        print(json.dumps(request.json))
 
         response_tup = SendRequest.send_request(request)
         response_str = response_tup[1]  # str
         response_parsed = json.loads(response_str)
+        # print(response_str)
         print(json.dumps(response_parsed, indent=2, sort_keys=True))
-                                                            # print("-----------------------new query-----------\n" + "myurl:  " + self.myurl) print("method_name: " + str(method_name) + " method_type: " + str(method_type)) print("query: " + str(request)) print(json.dumps(request.json, indent=2))
-        print()                                                   # print("--------query: ", method_name + " response: " + json.dumps(response_d) + " ------>\n\n")
+
+        # for consensus only
+        response_dict = json.loads(response_str)
+        if self.special == 1:
+            self.add_up(response_dict)
+        self.special = 0
         return response_tup, []
 
     def get_the_best_block(self, meth_type='POST'):
@@ -125,7 +155,7 @@ class SimpleRequests(object):
         param_list = [self.tchain_id]
         self.doit(method_nm, param_list, meth_type)  # four=1 for 8004 or 18004
 
-    def get_chain_cmd(self, method_nm="info", meth_type='POST'):  # now works best with 18004 docker wallet pro new code
+    def get_chain_cmd_public(self, meth_type='POST', method_nm="info"):  # now works best with 18004 docker wallet pro new code
         param_list = [self.tchain_id]
         self.doit(method_nm, param_list, meth_type)  # four=1 for 8004 or 18004
 
@@ -134,56 +164,126 @@ class SimpleRequests(object):
         self.doit(method_nm, param_list, meth_type)  # four=1 for 8004 or 18004
 
     def get_getConsensusNodes(self, meth_type='POST'):
+        self.special = 1
         method_nm = "getConsensusNodes"
         param_list = [self.tchain_id, 1, 99, 0]  # [chainId,pageNumber,pageSize,type],
         self.doit(method_nm, param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
 
-if __name__ == "__main__":
-    # s = SimpleRequests(4, 4810, 'url4')   # machine, chainid  west:  4, 4810
+    def get_prikey(self, myacct, pw, meth_type='POST'):
+        # [2, "tNULSeBaMhcccH1KeXhMpH5y3pvtRzatAiuMJk", "abcd1111"],
+        myacct= "tNULSeBaMpxUVQLW9J3AzbjFsQVRpC5RAnxVKz"
+        pw = "kathy123"
+        # method_nm = "getPriKey"
+        param_list = [2, myacct, pw]
+        self.doit("getPriKey", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
+
+    def getcoininfo(self, meth_type='POST'):  # consensusTotal
+        param_list = [self.tchain_id]
+        self.doit("getCoinInfo", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
+
+
+    def getchaininfo(self, meth_type='POST'):
+        param_list = [2]
+        self.doit("getCoinInfo", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
+
+    def getdeposit(self, meth_type='POST'):
+        param_list = [1]
+        self.doit("getTotalDeposit", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
+
+    # ####################  nerve
+
+    def nerve_block_by_height(self, cid=9, height=100, meth_type='POST'):
+        param_list = [cid, height]
+        self.doit("getHeaderByHeight", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
+
+    def nerve_chaininfo(self, cid=9, meth_type='POST'):
+        param_list = [cid]
+        self.doit("getChainInfo", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
+
+    def nerve_getbestblockheader(self, cid=1, meth_type='POST'):
+        param_list = [cid]
+        self.doit("getBestBlockHeader", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
+        # getBestBlockHeader works
+
+    def nervetest(self):
+        addy = "TNVTdTSPQvEngihwxqwCNPq3keQL1PwrcLbtj"
+        pg = 1
+        ps = "300"
+
+        param_list = {addy, pg, ps}
+        self.doit("empty", param_list)  # [self.tchain_id], 'POST' are defaults
+
+
+        # getDepositList
+        #getAllAsset doesn't work yet
+         # you can create_account, create-agent
+        # getRegisteredChainInfoList doesn't work
+
+
+if __name__ == "__main__":  #  for test networks chain_id is 2
     # note in ver 2.5 everything is POST, never get, most are 8003, some 8004
 
-    #s = SimpleRequests(1, 1, 'url4')   # machine, chainid  west:  4, 4810
-    # s.get_account('SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa', 'POST',)
-    # s.getBlockHeaderList()
-    # s.get_block_by_height(900000)
-    # s.get_the_best_block('GET')
-    # s.get_tx(nerve_tx_felip60, 'POST')  # post- get-
-    # s.get_chain_info('POST')  # post- get-
-    # s.get_the_best_block()
-    # s.get_chain_info_test()
-    # s.get_coin_info()
-    # s.get_block_by_height(900000)
-    # s.getBlockHeaderList()
-    # s.get_the_best_block('GET')
-
-    # s.get_the_best_block()
-    # s.get_consensus_node_ct()
-    # s.get_block_by_height(900000)
-    #s.get_chain_info_cs()
-
-    # s.get_chain_cmd("getVersion")
     s1 = SimpleRequests(1, 1, 'url3')   # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
 
-    s3 = SimpleRequests(3, 1, 'url3')  # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
-#  (self, machine=4, chainid=1, urltype='url4'):
-    #s4 = SimpleRequests(4, 1, 'url4')   # machine=4, chainid=1  west: 3,       nuls:1, 1
-    #s1.get_chain_info_get()
-    #s3.get_chain_info_get()
+    s1.nervetest()
+
+    data = {"key": "NVT/NULS", "type": 0, "decimal": 6, "size": 10}
+    data_json = json.dumps(data)
+    r = requests.get('http://beta.nervedex.com/order/list', data_json)
+    print()
+    exit()
+
+
+    # s.get_account('SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa', 'POST',)
+    # s.getBlockHeaderList()
+    # s.get_consensus_node_ct()
+    # s.get_block_by_height(900000)
+    # s.get_chain_cmd("getVersion")
+
+    s1 = SimpleRequests(1, 1, 'url3')   # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
+
+    # s3 = SimpleRequests(3, 1, 'url3')  # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
+    #  (self, machine=4, chainid=1, urltype='url4'):
+    s1.nerve_chaininfo(cid=9)  ## add up
+    s1.nerve_block_by_height(cid=9, height=100)  ## add up
+    s1.nerve_getDepositList(cid=9)  ## add up
+    s1.nerve_getbestblockheader(cid=9)  ## add up
+
+                          # s1.get_block_by_height("100")
+    # http: // beta.nervedex.com / order / list / history
+    # nervenetwork:
+    # ----------------------------------------------nervenetwork ----------------------
+    #s1.get_chain_info_get()   # works on public nerve!
+    #s1.nerve_block_by_height()  # nerve only: getHeaderByHeight   # works
+
+    #s3 = SimpleRequests(3, 9, 'url3')   # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
+
+
+    # ---- westteam:
+    #s3.nerve_chaininfo()  # nerve only: getHeaderByHeight   # works
+
+    #myacct="tNULSeBaMpxUVQLW9J3AzbjFsQVRpC5RAnxVKz"
+    #pw = "kathy123"
+    # s1.get_prikey(myacct, pw)
+    #s3.getcoininfo()
+    #s3.getdeposit()
 
     #s1.get_chain_cmd(method_nm="consensusInfo")
     #s1.get_chain_cmd4(method_nm="getChainInfo")
 
     print()
     # s3.get_block_by_height(3900000)  ## works
-    # s1.get_block_by_height(4000000)  # works
+    #s1.get_block_by_height(4000000)  # works
     #s1.get_the_best_block()
-    s3.get_the_best_block()
+    #s1.getcoininfo()
+    #s3.get_the_best_block()
 
     #
     # s4.get_chain_cmd("getBestBlockHeader")
     #s3.get_chain_cmd("getAllAddressPrefix")  # works
-    #s3.get_getConsensusNodes()  # works
-
+    # s3.get_getConsensusNodes()  # works
+    # s1.get_getConsensusNodes()  # works
+    #s1.get_chain_cmd_public(method_nm="getCoinInfo")
     # s.get_chain_cmd("cs_getRoundInfo")
     # s.get_chain_cmd("cs_getRoundInfo")
     # s.get_chain_info_cs()
