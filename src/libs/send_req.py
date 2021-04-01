@@ -14,7 +14,7 @@ class SendRequest(object):
         session = requests.Session()
         the_response = session.send(the_request)
         results_d = json.loads(the_response.text)
-        print(the_request.body)
+        #print(the_request.body)
         return results_d, the_response.text
 
 # works  transfer "SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa" "SPEXdKRT4trozwzXj5n1d7vZ7NR9QqbUFh4KG7" 1

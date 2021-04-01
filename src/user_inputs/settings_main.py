@@ -9,9 +9,10 @@ def target_setup(machine=1, tchain_id=1, urltype='url3'):
 
     if machine == 1:
         # main_machine = "http://beta.nervedex.com/api/orderlist"
-        main_machine = "https://public.nerve.network"
-        #main_machine = "http://westteam.nulstar.com"
-        main_machine = "http://beta.nervedex.com/order/list"
+        # main_machine = "https://public.nerve.network"
+        # main_machine = "http://westteam.nulstar.com"
+        # main_machine = "http://beta.nervedex.com/order/list"
+        main_machine = "https://public1.nuls.io"
 
         if urltype == 'url3':
             myurl = f"{main_machine}"

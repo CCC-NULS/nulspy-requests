@@ -48,49 +48,17 @@ class SimpleRequests(object):
     def doit(self, method_name, parameter_list, method_type='POST'):
         # request = prepare_top_section(method_name, parameter_list, self.myurl, method_type)  # 0 = get, 1=post
         request = prepare_top_section(method_name, parameter_list, self.myurl, method_type=method_type)
-        #print("running on this url:  " + self.myurl)
-        #print(json.dumps(request.json))
+        print("running on this url:  " + self.myurl)
+        print(json.dumps(request.json))
 
         response_tup = SendRequest.send_request(request)
         response_str = response_tup[1]  # str
         response_parsed = json.loads(response_str)
         # print(response_str)
-        #print(json.dumps(response_parsed, indent=2, sort_keys=True))
+        print(json.dumps(response_parsed, indent=2, sort_keys=True))
 
         # for consensus only
         response_dict = json.loads(response_str)
-        #  # temp only: - -  - - --  --- --  --  --- - --  --- - --April 1 2021  --- - --  --- -
-        big = 0
-
-        if method_name == 'getBlockByHeight':
-            res = response_dict.get('result')
-            tx_list = res.get('txList')
-            biglist = []
-            if big == 1:
-                for recordd in tx_list:
-                    print()
-                    print("----------------------------")
-                    print("height: ", recordd.get('height'))
-                    print("txData: ", recordd.get('txData'))
-                    print("value: ", recordd.get('value'))
-                    print("size: ",  recordd.get('size'))
-
-                    print("coinFroms: " + str(recordd.get('coinFroms')))
-                    print("coinTos: " + str(recordd.get('coinTos')))
-                    print("remark: " + str(recordd.get('remark')))
-
-            for recordd in tx_list:
-                arval = recordd.get('value')
-                if arval >= 2000000000000:
-                    coin_tos_list = recordd.get('coinTos')  # list of dict
-                    theaddy = coin_tos_list[0].get('address')
-                    part1 = str(recordd.get('value'))
-                    newstr = part1 + " ht: " + str(recordd.get('height')) + " " + str(theaddy)
-                    biglist.append(newstr)
-                    print(newstr)
-
-
-
         if self.special == 1:
             self.add_up(response_dict)
         self.special = 0
@@ -222,22 +190,59 @@ class SimpleRequests(object):
         param_list = [1]
         self.doit("getTotalDeposit", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
 
+    # ####################  nerve ###############################################################
+
+    def nerve_block_by_height(self, cid=9, height=100, meth_type='POST'):
+        param_list = [cid, height]
+        self.doit("getHeaderByHeight", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
+
+    def nerve_chaininfo(self, cid=9, meth_type='POST'):
+        param_list = [cid]
+        self.doit("getChainInfo", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
+
+    def nerve_getbestblockheader(self, cid=1, meth_type='POST'):
+        param_list = [cid]
+        self.doit("getBestBlockHeader", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
+        # getBestBlockHeader works
+
+    def nervetest(self):
+        addy = "TNVTdTSPQvEngihwxqwCNPq3keQL1PwrcLbtj"
+        pg = 1
+        ps = "300"
+
+        param_list = {addy, pg, ps}
+        self.doit("empty", param_list)  # [self.tchain_id], 'POST' are defaults
+
+
+        # getDepositList
+        #getAllAsset doesn't work yet
+         # you can create_account, create-agent
+        # getRegisteredChainInfoList doesn't work
 
 
 if __name__ == "__main__":  #  for test networks chain_id is 2
     # note in ver 2.5 everything is POST, never get, most are 8003, some 8004
 
     s1 = SimpleRequests(1, 1, 'url3')   # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
-    # s1.get_chain_info_get()
-    #s1.get_the_best_block()
-    for i in range(0, 1000):
-        s1.get_block_by_height(i)
-
+    s1.get_chain_info_get()
+    s1.get_the_best_block()
+    # s1.getBlockHeaderList()
     # s1.get_consensus_node_ct()
     # s1.get_block_by_height(900000)
 
     exit()
 
+
+
+    # s1 = SimpleRequests(1, 1, 'url3')   # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
+
+    # s1.nervetest()
+
+    # data = {"key": "NVT/NULS", "type": 0, "decimal": 6, "size": 10}
+    # data_json = json.dumps(data)
+    # r = requests.get('http://beta.nervedex.com/order/list', data_json)
+    # print()
+    # exit()
 
 
     # s.get_account('SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa', 'POST',)
@@ -247,9 +252,19 @@ if __name__ == "__main__":  #  for test networks chain_id is 2
     # s.get_chain_cmd("getVersion")
 
 
+    # s3 = SimpleRequests(3, 1, 'url3')  # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
+    #  (self, machine=4, chainid=1, urltype='url4'):
+    # s1.nerve_chaininfo(cid=9)  ## add up
+    # s1.nerve_block_by_height(cid=9, height=100)  ## add up
+    # s1.nerve_getDepositList(cid=9)  ## add up
+    # s1.nerve_getbestblockheader(cid=9)  ## add up
 
                           # s1.get_block_by_height("100")
-
+    # http: // beta.nervedex.com / order / list / history
+    # nervenetwork:
+    # ----------------------------------------------nervenetwork ----------------------
+    #s1.get_chain_info_get()   # works on public nerve!
+    #s1.nerve_block_by_height()  # nerve only: getHeaderByHeight   # works
 
     #s3 = SimpleRequests(3, 9, 'url3')   # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
 
