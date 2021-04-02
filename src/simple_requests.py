@@ -4,7 +4,7 @@ import json
 from src.libs.master_setup import master_setup
 from src.libs.setup_top import prepare_top_section
 from src.libs.send_req import SendRequest
-import requests
+import datetime
 
 class SimpleRequests(object):
 
@@ -82,10 +82,22 @@ class SimpleRequests(object):
             for recordd in tx_list:
                 arval = recordd.get('value')
                 if arval >= 2000000000000:
+                    dtime = "none"
+                    crtime = recordd.get('createTime')
+                    if crtime:
+
+                        dtime = datetime.datetime.fromtimestamp(crtime)
+                    fr_addy = 'none'
                     coin_tos_list = recordd.get('coinTos')  # list of dict
-                    theaddy = coin_tos_list[0].get('address')
-                    part1 = str(recordd.get('value'))
-                    newstr = part1 + " ht: " + str(recordd.get('height')) + " " + str(theaddy)
+                    coin_frm_list = recordd.get('coinFroms')  # list of dict
+                    to_addy = coin_tos_list[0].get('address')
+                    if coin_frm_list:
+                        fr_addy = coin_frm_list[0].get('address')
+                    part1 = str(recordd.get('value')) + " ht:"
+                    part2 = str(recordd.get('height')) + " to:"
+                    remarky = " remark:" + str(recordd.get('remark'))
+                    timey = " date:" + crtime
+                    newstr = part1 + part2 + str(to_addy) + " from:" + str(fr_addy) + timey + remarky
                     biglist.append(newstr)
                     print(newstr)
 
