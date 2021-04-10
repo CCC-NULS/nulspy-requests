@@ -7,12 +7,12 @@ def target_setup(machine=1, tchain_id=1, urltype='url3'):
     main_machine = ""
     myurl = None
 
-    if machine == 1:
+    if machine == 2:
         # main_machine = "http://beta.nervedex.com/api/orderlist"
         # main_machine = "https://public.nerve.network"
-        # main_machine = "http://westteam.nulstar.com"
+        main_machine = "http://westteam.nulstar.com"
         # main_machine = "http://beta.nervedex.com/order/list"
-        main_machine = "https://public1.nuls.io"
+        #main_machine = "https://public1.nuls.io"
 
         if urltype == 'url3':
             myurl = f"{main_machine}"
@@ -20,12 +20,12 @@ def target_setup(machine=1, tchain_id=1, urltype='url3'):
         elif urltype == 'url4':
             myurl = f"{main_machine}"
 
-    elif machine == 3:
+    elif machine == 1:
         main_machine = "http://westteam.nulstar.com"
-        port3 = "17013"
-        port4 = "17014"
+        port3 = "18013"
+        port4 = "18014"
         if urltype == 'url3':
-            myurl = f"{main_machine}:{port4}"
+            myurl = f"{main_machine}:{port3}"
 
         elif urltype == 'url4':
             myurl = f"{main_machine}:{port4}"

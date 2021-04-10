@@ -48,64 +48,16 @@ class SimpleRequests(object):
     def doit(self, method_name, parameter_list, method_type='POST'):
         # request = prepare_top_section(method_name, parameter_list, self.myurl, method_type)  # 0 = get, 1=post
         request = prepare_top_section(method_name, parameter_list, self.myurl, method_type=method_type)
-        #print("running on this url:  " + self.myurl)
-        #print(json.dumps(request.json))
 
         response_tup = SendRequest.send_request(request)
-        response_str = response_tup[1]  # str
-        response_parsed = json.loads(response_str)
-        # print(response_str)
-        #print(json.dumps(response_parsed, indent=2, sort_keys=True))
+        result_part = response_tup[0].get('result')
+        result_addy = result_part.get('address')
+        consensus_amt = result_part.get('consensusLock')
+        totbal = result_part.get('totalBalance')  #big int
+        totbal_int = int(totbal/100000000)  # reg int
+        # print(f"{totbalint:,}" + "   " + temp_list[1])
 
-        # for consensus only
-        response_dict = json.loads(response_str)
-        #  # temp only: - -  - - --  --- --  --  --- - --  --- - --April 1 2021  --- - --  --- -
-        big = 0
-
-        if method_name == 'getBlockByHeight':
-            res = response_dict.get('result')
-            tx_list = res.get('txList')
-            biglist = []
-            if big == 1:
-                for recordd in tx_list:
-                    print()
-                    print("----------------------------")
-                    print("height: ", recordd.get('height'))
-                    print("txData: ", recordd.get('txData'))
-                    print("value: ", recordd.get('value'))
-                    print("size: ",  recordd.get('size'))
-
-                    print("coinFroms: " + str(recordd.get('coinFroms')))
-                    print("coinTos: " + str(recordd.get('coinTos')))
-                    print("remark: " + str(recordd.get('remark')))
-
-            for recordd in tx_list:
-                arval = recordd.get('value')
-                if arval >= 2000000000000:
-                    dtime = "none"
-                    crtime = recordd.get('createTime')
-                    if crtime:
-
-                        dtime = datetime.datetime.fromtimestamp(crtime)
-                    fr_addy = 'none'
-                    coin_tos_list = recordd.get('coinTos')  # list of dict
-                    coin_frm_list = recordd.get('coinFroms')  # list of dict
-                    to_addy = coin_tos_list[0].get('address')
-                    if coin_frm_list:
-                        fr_addy = coin_frm_list[0].get('address')
-                    part1 = str(recordd.get('value')) + " ht:"
-                    part2 = str(recordd.get('height')) + " to:"
-                    remarky = " remark:" + str(recordd.get('remark'))
-                    timey = " date:" + crtime
-                    newstr = part1 + part2 + str(to_addy) + " from:" + str(fr_addy) + timey + remarky
-                    biglist.append(newstr)
-                    print(newstr)
-
-
-
-        if self.special == 1:
-            self.add_up(response_dict)
-        self.special = 0
+        print(result_addy + " consensuslock: " + str(consensus_amt) + " totalbalance: " + str(f"{totbal_int:,}"))
         return response_tup, []
 
     def get_the_best_block(self, meth_type='POST'):
@@ -115,7 +67,7 @@ class SimpleRequests(object):
 
     def get_account(self, acct, meth_type='POST'):
         method_nm = "getAccount"
-        print("chainid:  ", self.tchain_id)
+        # print("chainid:  ", self.tchain_id)
         param_list = [self.tchain_id, acct]
         self.doit(method_nm, param_list, meth_type)
 
@@ -186,7 +138,6 @@ class SimpleRequests(object):
         param_list = [self.tchain_id]
         self.doit(method_nm, param_list, 'POST')   # four=1 for 8004 or 18004
 
-
     def get_chain_info_info(self, meth_type='POST'):  # now works best with 18004 docker wallet pro new code
         method_nm = "info"
         param_list = [self.tchain_id]
@@ -234,23 +185,50 @@ class SimpleRequests(object):
         param_list = [1]
         self.doit("getTotalDeposit", param_list, meth_type)  # [self.tchain_id], 'POST' are defaults
 
+    def getaccounts(self, meth_type='POST'):  # 4=POST
+        method_nm = "getaddresslist"  #getaddresslist
+        page_number = 1
+        page_size = 99999
+
+        p_list = [self.tchain_id, page_number, page_size]
+        request = prepare_top_section(method_nm, p_list, self.myurl, method_type=meth_type)
+        response_tup = SendRequest.send_request(request)
+
+        result_part = response_tup[0].get('result')
+        result_addy = result_part.get('address')
+
 
 
 if __name__ == "__main__":  #  for test networks chain_id is 2
     # note in ver 2.5 everything is POST, never get, most are 8003, some 8004
 
     s1 = SimpleRequests(1, 1, 'url3')   # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
-    # s1.get_chain_info_get()
-    #s1.get_the_best_block()
-    for i in range(0, 1000):
-        s1.get_block_by_height(i)
+    ntcaccts = ['NULSd6HgjGMkrh5mbmWPMxaTzgpZBctSQBizG',  # consensuslock: 2000000000000 totalbalance: 2000085969280
+                'NULSd6Hgi8DVA1evHpuojzMpedHgsYojYaKBe',  # consensuslock: 2000000000000 totalbalance: 2000009711110
+                'NULSd6HgaA7qFUw3jVkcqRD1iggzoffEigJRe',  # consensuslock: 0 totalbalance: 0  now in: xFZx
+                'NULSd6HgVnuWDhVzdUcGScoS4erce4jYtWL8w',  # consensuslock: 0 totalbalance: 0  now in: xFZx
+                'NULSd6HgbM6hYM2RRNjK4JQmnoLdS96NV77aV',  # consensuslock: 0 totalbalance: 0  now in: xFZx
+                'NULSd6HgcKLvyoqUdqcTUe8oDjKUK25v8Cqff',  # consensuslock: 2000000000000 totalbalance: 2000009900000
+                'NULSd6HgcX2oV8tb7utfJJN9G3x9Tjj5YcdXA',  # consensuslock: 0 totalbalance: 0
+                'NULSd6Hge1jAwN3JXpMu1XA8RN33WnaJHCHVB',  # consensuslock: 20,000.00000000 totalbalance: 2000009900000
+                'NULSd6Hge4zpeVW7GPDnsCgPDVHnxakHEXRXE',  # consensuslock: 20,000.00000000 totalbalance: 2000009900000
+                'NULSd6HgectFiZCqoUzpEB4okDBALx4BJBfKd',  # consensuslock: 20,000.00000000 totalbalance: 2000009900000
+                'NULSd6HgftfyNoKhzDzvAUHCA2vgnjCBUuf7a',  # consensuslock: 0 totalbalance: 20000.09900000
+                'NULSd6HgcfGtsmm79QDoBK1MAjqNmm3rgKXSj',  # consensuslock: 0 totalbalance: 250328829
+                'NULSd6HgjAc2pXyBi6P4EVMC6MAmnn5Ei5SgL',  # consensuslock: 0 totalbalance: 15253.76695481
+                'NULSd6HgjDZmLMbZSmH9tqb6smdzZHCxsCRD3',  # consensuslock: 0 totalbalance: 0
+                'NULSd6HgYhGUZYApGnB3PLwa6Ji5GLJDtt6LZ',  # consensuslock: 0 totalbalance: 20000.09300000
+                'NULSd6Hh84g7u61ntrWhrdEMjXvM9STRPxFZx',  # consensuslock: 4,299,999.00000000 totalbalance: 7,702,713.12653025
+                'NULSd6Hh76ja8dHkTdYvTJS9gEAygiU1uLRGR',  # consensuslock: 0 totalbalance: 12,076,898.96243277
+                'NULSd6HgXY3zLvEoCRUa6yFXwpnF8gqrDeToT',
+                ]
+    # new acct : NULSd6Hh84g7u61ntrWhrdEMjXvM9STRPxFZx 7.8 mils
 
-    # s1.get_consensus_node_ct()
-    # s1.get_block_by_height(900000)
+    # for i in ntcaccts:
+    #     s1.get_account(i)
 
-    exit()
-
-
+    #s1.getaccounts()
+    s1.get_account('NULSd6Hh76ja8dHkTdYvTJS9gEAygiU1uLRGR')
 
     # s.get_account('SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa', 'POST',)
     # s.getBlockHeaderList()
