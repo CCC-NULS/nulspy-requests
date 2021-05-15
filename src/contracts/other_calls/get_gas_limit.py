@@ -4,6 +4,8 @@
 from src.libs.setup_log import SetupLogging
 from src.user_inputs.settings_main import SettingsSet
 from src.libs.setup_top import SetupTop
+from src.old_code.old_setup_top import prepare_top_section
+from src.old_code.old_send_req import SendRequest
 
 class GetGasLimit(object):
     # http://bin-hex-converter.online-domain-tools.com/

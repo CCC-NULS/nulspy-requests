@@ -2,8 +2,8 @@
 
 from typing import List, Any
 import src.user_inputs.settings_main as settings
-from src.libs.setup_top import prepare_top_section
-from src.libs.send_req import SendRequest
+from src.old_code.old_setup_top import prepare_top_section
+from src.old_code.old_send_req import SendRequest
 import datetime
 
 

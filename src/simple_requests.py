@@ -1,32 +1,55 @@
 #!/usr/bin/python3.7
 
+# from src.libs.setup_top import prepare_top_section
+# from src.libs.send_req import SendRequest
+import src.user_inputs.settings_main
+import requests
 import json
-from src.libs.master_setup import master_setup
-from src.libs.setup_top import prepare_top_section
-from src.libs.send_req import SendRequest
-import datetime
+from requests import Request
+from json.encoder import JSONEncoder
+
 
 class SimpleRequests(object):
 
-    def __init__(self, machine=4, chainid=1, urltype='url3'):
-        settings_main_dd, sender_etc_dd, self.receivers = master_setup(machine, chainid, urltype)
-        # machine is the server that is running the public blockchain api to query
+    def __init__(self, machine=2, chainid=1, urltype='url3'):
+        settings_main_dd = src.user_inputs.settings_main.target_setup(machine, chainid, urltype)
 
         self.tchain_id = settings_main_dd.get('tchain_id')
         self.myurl = settings_main_dd.get('myurl')
-        self.sender = sender_etc_dd.get('sender')
-        self.pw = sender_etc_dd.get('pw')
 
-        self.remark = "get list of accounts"
+        self.remark = "get list"
         self.assetid = 1
         self.id = 999
         self.special = 0
 
+    def doit(self, method_name, plist=[], method_type='POST'):
+        # oldrequest = prepare_top_section(method_name, parameter_list, self.myurl, method_type=method_type)
+        acct_val = "NULSd6HgXh4geZVxrw7hpgKuThM4nmSBjjxJf"
+        headers = dict([("Content-Type", "application/json;charset=UTF-8",)])
+
+        plist = [1, acct_val]
+
+        jd: dict = {"jsonrpc": "2.0", "method": method_name, "params": plist, "id": 99}
+
+        jd_json = JSONEncoder().encode(jd)
+
+        # {"jsonrpc": "2.0", "method": "getChainInfo", "params": [1], "id": 1234}'
+
+        session = requests.Session()
+        req = Request(method_type, self.myurl, data=jd_json, headers=headers)
+        prepped = req.prepare()
+        # prepped.body = myjson
+        print("got this far")
+        the_response = session.send(prepped)
+
+        str_dict = json.loads(the_response.content)  # load the byte content
+        jj = json.dumps(str_dict, indent=2)
+        print(jj)
+        return 0, 0
+
 
     def add_up(self, response_dict2):
         resp_list_of_d = response_dict2.get("result").get("list")
-        # print("-----------------------new query-----------\n" + "myurl:  " + self.myurl) print("method_name: " + str(method_name) + " method_type: " + str(method_type)) print("query: " + str(
-        # request)) print(json.dumps(request.json, indent=2))
         bigtot = 0
         for anode in resp_list_of_d:
             tot_dep = anode.get("totalDeposit")
@@ -44,21 +67,20 @@ class SimpleRequests(object):
         f"{bt:,}"
         print(f"{bt:,}")
 
-    # def prepare_top_plain(method, param_list, the_url, method_type='POST'):  # no method
-    def doit(self, method_name, parameter_list, method_type='POST'):
-        # request = prepare_top_section(method_name, parameter_list, self.myurl, method_type)  # 0 = get, 1=post
-        request = prepare_top_section(method_name, parameter_list, self.myurl, method_type=method_type)
-
-        response_tup = SendRequest.send_request(request)
-        result_part = response_tup[0].get('result')
-        result_addy = result_part.get('address')
-        consensus_amt = result_part.get('consensusLock')
-        totbal = result_part.get('totalBalance')  #big int
-        totbal_int = int(totbal/100000000)  # reg int
-        # print(f"{totbalint:,}" + "   " + temp_list[1])
-
-        print(result_addy + " consensuslock: " + str(consensus_amt) + " totalbalance: " + str(f"{totbal_int:,}"))
-        return response_tup, []
+    # def doit2(self, method_name, parameter_list, method_type='POST'):
+    #     # request = prepare_top_section(method_name, parameter_list, self.myurl, method_type)  # 0 = get, 1=post
+    #     request = prepare_top_section(method_name, parameter_list, self.myurl, method_type=method_type)
+    #
+    #     response_tup = SendRequest.send_request(request)
+    #     result_part = response_tup[0].get('result')
+    #     result_addy = result_part.get('address')
+    #     consensus_amt = result_part.get('consensusLock')
+    #     totbal = result_part.get('totalBalance')  #big int
+    #     totbal_int = int(totbal/100000000)  # reg int
+    #     # print(f"{totbalint:,}" + "   " + temp_list[1])
+    #
+    #     print(result_addy + " consensuslock: " + str(consensus_amt) + " totalbalance: " + str(f"{totbal_int:,}"))
+    #     return response_tup, []
 
     def get_the_best_block(self, meth_type='POST'):
         method_nm = "getBestBlockHeader"
@@ -202,33 +224,40 @@ class SimpleRequests(object):
 if __name__ == "__main__":  #  for test networks chain_id is 2
     # note in ver 2.5 everything is POST, never get, most are 8003, some 8004
 
-    s1 = SimpleRequests(1, 1, 'url3')   # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
-    ntcaccts = ['NULSd6HgjGMkrh5mbmWPMxaTzgpZBctSQBizG',  # consensuslock: 2000000000000 totalbalance: 2000085969280
-                'NULSd6Hgi8DVA1evHpuojzMpedHgsYojYaKBe',  # consensuslock: 2000000000000 totalbalance: 2000009711110
-                'NULSd6HgaA7qFUw3jVkcqRD1iggzoffEigJRe',  # consensuslock: 0 totalbalance: 0  now in: xFZx
-                'NULSd6HgVnuWDhVzdUcGScoS4erce4jYtWL8w',  # consensuslock: 0 totalbalance: 0  now in: xFZx
-                'NULSd6HgbM6hYM2RRNjK4JQmnoLdS96NV77aV',  # consensuslock: 0 totalbalance: 0  now in: xFZx
-                'NULSd6HgcKLvyoqUdqcTUe8oDjKUK25v8Cqff',  # consensuslock: 2000000000000 totalbalance: 2000009900000
-                'NULSd6HgcX2oV8tb7utfJJN9G3x9Tjj5YcdXA',  # consensuslock: 0 totalbalance: 0
-                'NULSd6Hge1jAwN3JXpMu1XA8RN33WnaJHCHVB',  # consensuslock: 20,000.00000000 totalbalance: 2000009900000
-                'NULSd6Hge4zpeVW7GPDnsCgPDVHnxakHEXRXE',  # consensuslock: 20,000.00000000 totalbalance: 2000009900000
-                'NULSd6HgectFiZCqoUzpEB4okDBALx4BJBfKd',  # consensuslock: 20,000.00000000 totalbalance: 2000009900000
-                'NULSd6HgftfyNoKhzDzvAUHCA2vgnjCBUuf7a',  # consensuslock: 0 totalbalance: 20000.09900000
-                'NULSd6HgcfGtsmm79QDoBK1MAjqNmm3rgKXSj',  # consensuslock: 0 totalbalance: 250328829
-                'NULSd6HgjAc2pXyBi6P4EVMC6MAmnn5Ei5SgL',  # consensuslock: 0 totalbalance: 15253.76695481
-                'NULSd6HgjDZmLMbZSmH9tqb6smdzZHCxsCRD3',  # consensuslock: 0 totalbalance: 0
-                'NULSd6HgYhGUZYApGnB3PLwa6Ji5GLJDtt6LZ',  # consensuslock: 0 totalbalance: 20000.09300000
-                'NULSd6Hh84g7u61ntrWhrdEMjXvM9STRPxFZx',  # consensuslock: 4,299,999.00000000 totalbalance: 7,702,713.12653025
-                'NULSd6Hh76ja8dHkTdYvTJS9gEAygiU1uLRGR',  # consensuslock: 0 totalbalance: 12,076,898.96243277
-                'NULSd6HgXY3zLvEoCRUa6yFXwpnF8gqrDeToT',
-                ]
-    # new acct : NULSd6Hh84g7u61ntrWhrdEMjXvM9STRPxFZx 7.8 mils
+    s1 = SimpleRequests(2, 1, 'url3')   # machine=1 public1, chainid=1  west:  3,       nuls:1, 1
+    s1.get_the_best_block()
+    exit()
 
+
+    ku = "NULSd6HgXh4geZVxrw7hpgKuThM4nmSBjjxJf"
+    s1.getcoininfo()
+    s1.get_account(ku)
+
+    # ntcaccts = ['NULSd6HgjGMkrh5mbmWPMxaTzgpZBctSQBizG',  # consensuslock: 2000000000000 totalbalance: 2000085969280
+    #             'NULSd6Hgi8DVA1evHpuojzMpedHgsYojYaKBe',  # consensuslock: 2000000000000 totalbalance: 2000009711110
+    #             'NULSd6HgaA7qFUw3jVkcqRD1iggzoffEigJRe',  # consensuslock: 0 totalbalance: 0  now in: xFZx
+    #             'NULSd6HgVnuWDhVzdUcGScoS4erce4jYtWL8w',  # consensuslock: 0 totalbalance: 0  now in: xFZx
+    #             'NULSd6HgbM6hYM2RRNjK4JQmnoLdS96NV77aV',  # consensuslock: 0 totalbalance: 0  now in: xFZx
+    #             'NULSd6HgcKLvyoqUdqcTUe8oDjKUK25v8Cqff',  # consensuslock: 2000000000000 totalbalance: 2000009900000
+    #             'NULSd6HgcX2oV8tb7utfJJN9G3x9Tjj5YcdXA',  # consensuslock: 0 totalbalance: 0
+    #             'NULSd6Hge1jAwN3JXpMu1XA8RN33WnaJHCHVB',  # consensuslock: 20,000.00000000 totalbalance: 2000009900000
+    #             'NULSd6Hge4zpeVW7GPDnsCgPDVHnxakHEXRXE',  # consensuslock: 20,000.00000000 totalbalance: 2000009900000
+    #             'NULSd6HgectFiZCqoUzpEB4okDBALx4BJBfKd',  # consensuslock: 20,000.00000000 totalbalance: 2000009900000
+    #             'NULSd6HgftfyNoKhzDzvAUHCA2vgnjCBUuf7a',  # consensuslock: 0 totalbalance: 20000.09900000
+    #             'NULSd6HgcfGtsmm79QDoBK1MAjqNmm3rgKXSj',  # consensuslock: 0 totalbalance: 250328829
+    #             'NULSd6HgjAc2pXyBi6P4EVMC6MAmnn5Ei5SgL',  # consensuslock: 0 totalbalance: 15253.76695481
+    #             'NULSd6HgjDZmLMbZSmH9tqb6smdzZHCxsCRD3',  # consensuslock: 0 totalbalance: 0
+    #             'NULSd6HgYhGUZYApGnB3PLwa6Ji5GLJDtt6LZ',  # consensuslock: 0 totalbalance: 20000.09300000
+    #             'NULSd6Hh84g7u61ntrWhrdEMjXvM9STRPxFZx',  # consensuslock: 4,299,999.00000000 totalbalance: 7,702,713.12653025
+    #             'NULSd6Hh76ja8dHkTdYvTJS9gEAygiU1uLRGR',  # consensuslock: 0 totalbalance: 12,076,898.96243277
+    #             'NULSd6HgXY3zLvEoCRUa6yFXwpnF8gqrDeToT',
+    #             ]
+    # new acct : NULSd6Hh84g7u61ntrWhrdEMjXvM9STRPxFZx 7.8 mils
+# NULSd6HgXh4geZVxrw7hpgKuThM4nmSBjjxJf    kucoin-nuls
     # for i in ntcaccts:
     #     s1.get_account(i)
 
     #s1.getaccounts()
-    s1.get_account('NULSd6Hh76ja8dHkTdYvTJS9gEAygiU1uLRGR')
 
     # s.get_account('SPEXdKRT4pz7ZhasM9pTK4fvGrJf8eod5ZqtXa', 'POST',)
     # s.getBlockHeaderList()

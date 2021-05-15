@@ -1,23 +1,19 @@
 #!/usr/bin/python3.7
 
 
-def target_setup(machine=1, tchain_id=1, urltype='url3'):
+def target_setup(machine=2, tchain_id=1, urltype='url3'):
     print("urltype: ", urltype)
     print("tchain_id: ", tchain_id)
     main_machine = ""
     myurl = None
 
     if machine == 2:
-        # main_machine = "http://beta.nervedex.com/api/orderlist"
-        # main_machine = "https://public.nerve.network"
-        main_machine = "http://westteam.nulstar.com"
-        # main_machine = "http://beta.nervedex.com/order/list"
-        #main_machine = "https://public1.nuls.io"
-
+        main_machine = "https://public1.nuls.io"
         if urltype == 'url3':
             myurl = f"{main_machine}"
-
         elif urltype == 'url4':
+            myurl = f"{main_machine}"
+        else:
             myurl = f"{main_machine}"
 
     elif machine == 1:
@@ -26,7 +22,6 @@ def target_setup(machine=1, tchain_id=1, urltype='url3'):
         port4 = "18014"
         if urltype == 'url3':
             myurl = f"{main_machine}:{port3}"
-
         elif urltype == 'url4':
             myurl = f"{main_machine}:{port4}"
 
@@ -34,10 +29,9 @@ def target_setup(machine=1, tchain_id=1, urltype='url3'):
     print("tchain_id: ", tchain_id)
     print("myurl: ", myurl)
 
-    target_setup_dd = {"tchain_id": tchain_id, "myurl": myurl}  # mychain_id is usually 1, 4810 for SPEX
+    targ_dict = {"tchain_id": tchain_id, "myurl": myurl}  # mychain_id is usually 1, 4810 for SPEX
     print("final myurl: ", myurl)
-    print(" ")
-    return target_setup_dd
+    return targ_dict
 
 
 

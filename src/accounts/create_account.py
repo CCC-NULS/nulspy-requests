@@ -3,10 +3,9 @@
 
 import logging
 from src.libs.master_setup import master_setup, unpack_d
-from src.libs.setup_top import prepare_top_section
-from src.libs.send_req import SendRequest
 from src.accounts.account_keys import AccountKeys
-
+from src.old_code.old_setup_top import prepare_top_section
+from src.old_code.old_send_req import SendRequest
 
 class CreateAccount(object):
 
